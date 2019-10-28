@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -28,7 +29,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/welcome'; //khi đăng ký xong là tài khoản tự login rồi, vậy là quay lại home luôn
+
 
     /**
      * Create a new controller instance.
@@ -64,9 +66,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name' =>  $data['name'] ,
+            'email' =>  $data['email'],
+            'password' => bcrypt($data['password']), //vì lúc nhập vào chỉ có chừng này data thôi, còn lại để null rồi
         ]);
-    }
+    } //ok rồi đó, coi chỗ mã hóa password là ok
 }

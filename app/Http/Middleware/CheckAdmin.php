@@ -19,6 +19,6 @@ class CheckAdmin
         if(Auth::user() && Auth::user()->roles == 1 ){
             return $next($request);
         }
-            return redirect()->route('home'); //dieu huong
+            return redirect()->route('welcome'); //dieu huong
         }
 }

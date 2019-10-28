@@ -11,7 +11,7 @@ class Books extends Model
     protected $table = "books";
 
     protected $fillable = [
-    	'name','id'
+    	'name','id', 'img', 'author', 'describes', 'price', 'number', 'category_id'
     ];
 
     public function Categories (){

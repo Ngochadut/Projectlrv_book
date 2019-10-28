@@ -48,7 +48,7 @@
                     <!-- LOGO -->
                     <div class="col-md-3">
                         <div class="header-logo">
-                            <a href="#" class="logo">
+                            <a href="{{ route('welcome') }}" class="logo">
                                 <img src="image/logo.png" alt="">
                             </a>
                         </div>
@@ -60,19 +60,11 @@
                         <div class="header-search">
                             <form>
                                 <select class="input-select">
-                                    <option value="0">All Categories</option>
-                                    <option value="1">Sách văn học</option>
-                                    <option value="1">Sách kinh tế</option>
-                                    <option value="1">Sách thiếu nhi</option>
-                                    <option value="1">Sách kinh tế</option>
-                                    <option value="1">Sách kỹ năng sống</option>
-                                    <option value="1">Sách Bà mẹ</option>
-                                    <option value="1">Sách Giáo Khoa</option>
-                                    <option value="1">Sách học Ngoại Ngữ</option>
-                                    <option value="1">Sách Tham Khảo</option>
-                                    <option value="1">Sách tổng hợp</option>
-                                    <option value="1">Sách Khoa Học</option>
-                                    <option value="1">Sách Lịch sử</option>
+
+                                    <option value="-1">All Categories</option>
+                                    @foreach(App\Categories::all() as $category)
+                                        <option value="{{ $category->id }}">{{$category->name}}</option>
+                                    @endforeach
                                 </select>
                                 <input class="input" placeholder="Search here">
                                 <button class="search-btn">Search</button>
@@ -98,8 +90,9 @@
                             <div class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     <i class="fa fa-shopping-cart"></i>
-                                    <span>Your Cart</span>
                                     <div class="qty">3</div>
+                                    <span><a href="{{ route('checkOut') }}"> Cart</span>
+                                
                                 </a>
                             </div>
                             <!-- /Cart -->
@@ -129,11 +122,11 @@
                 <div id="responsive-nav">
                     <!-- NAV -->
                     <ul class="main-nav nav navbar-nav">
-                        <li class="active"><a href="#">Trang chủ</a></li>
+                        <li class="active"><a href="{{ route('welcome') }}">Trang chủ</a></li>
                         <li><a href="#">Flash Sale</a></li>
                         <li><a href="#">B-POINT</a></li>
                         <li><a href="#">B-Blog</a></li>
-                        <li><a href="#">B-POINT Store</a></li>
+                    <li><a href="{{ route('bookStore') }}">B-POINT Store</a></li>
                         <li><a href="#">B-ACOUNT</a></li>
                     </ul>
                     <!-- /NAV -->
