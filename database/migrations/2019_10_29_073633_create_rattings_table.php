@@ -16,13 +16,12 @@ class CreateRattingsTable extends Migration
         Schema::create('rattings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('book_id')->unsigned();
+            $table->bigInteger('product_id')->unsigned();
             $table->integer('start_number');
             $table->longText('comment');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
-
+            $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
         });
     }
 

@@ -1,19 +1,16 @@
 <?php
 
 namespace App;
-
+use App\Product;
 use Illuminate\Database\Eloquent\Model;
-use App\Books;
 
 class Categories extends Model
 {
     protected $table = "categories";
-
     protected $fillable = [
-    	'name','id'
+    	'name','parent_id','describes','create_by','update_by','delete_flag'
     ];
-
-    public function Books(){
-    	return $this->hasMany(Books::class);
+    public function Product(){
+    	return $this->hasMany(Product::class,'category_id','id');
     }
 }

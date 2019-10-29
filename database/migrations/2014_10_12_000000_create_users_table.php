@@ -18,15 +18,19 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone');
-            $table->tinyInteger('gender');
             $table->string('address');
             $table->string('firstname');
             $table->string('lastname');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('roles');
+            $table->bigInteger('active');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('create_by');
+            $table->string('update_by');
+            $table->float('delete_flag');
+            //edit lan 1,xoa gender và thêm vào các cột
+
         });
     }
 
