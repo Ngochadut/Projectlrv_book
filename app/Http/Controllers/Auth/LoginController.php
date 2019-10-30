@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -35,5 +36,17 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function sendLoginResponse(\Illuminate\Http\Request $request)
+    {
+        $request->session()->regenerate();
+
+        $this->clearLoginAttempts($request);
+        
+        $role_admin_id = DB::table('roles')->where('name','admin')->first()->id; //lấy id của role admin
+        $user_role = DB::table('user_role')->where('user_id',$this->guard()->user()->id)->first()->role_id;
+        return $this->authenticated($request, $this->guard()->user())
+                ?: redirect()->intended(($role_admin_id == $user_role) ? 'admin' : $this->redirectPath());
     }
 }

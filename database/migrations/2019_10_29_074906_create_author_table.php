@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriesTable extends Migration
+class CreateAuthorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,20 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('author', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('parent_id')->unsigned();;
+            $table->bigInteger('product_id')->unsigned();
             $table->string('name');
-            $table->longText('describes');
+            $table->string('img')->nullable();//hinh anh
+            $table->longText('address')->nullable();//que quan
+            $table->longText('describes');//mo ta
+            $table->date('born')->nullable();//ngay sinh
+            $table->date('died')->nullable();
             $table->timestamps();
             $table->string('create_by');
             $table->string('update_by');
-            $table->foreign('parent_id')->references('id')->on('parent_category')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
             $table->boolean('delete_at')->nullable();
-            // edit the first, add column (describes, create_by...)
         });
     }
 
@@ -34,6 +37,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('author');
     }
 }

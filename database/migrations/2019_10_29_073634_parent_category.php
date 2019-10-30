@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateImageTable extends Migration
+class ParentCategory extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateImageTable extends Migration
      */
     public function up()
     {
-        Schema::create('image', function (Blueprint $table) {
+        Schema::create('parent_category', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('product_id')->unsigned();
-            $table->string('name')->nullable();
-            $table->timestamps();
+            $table->string('name');
             $table->string('create_by');
             $table->string('update_by');
-            $table->float('delete_flag');
-            $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
+            $table->timestamps(); 
+            $table->boolean('delete_at')->nullable();//hàm tạo cột create_at & update_at 
+            // edit the first, add column (describes, create_by...)
         });
     }
 
@@ -32,6 +31,6 @@ class CreateImageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('image');
+        Schema::dropIfExists('parent_category');
     }
 }

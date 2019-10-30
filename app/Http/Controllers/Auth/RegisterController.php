@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+
+
+use App\Users;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
+use App\Roles;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 
 class RegisterController extends Controller
 {
@@ -23,15 +27,14 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+   
 
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = '/welcome'; //khi đăng ký xong là tài khoản tự login rồi, vậy là quay lại home luôn
-
-
+    protected $redirectTo = '/welcome'; 
     /**
      * Create a new controller instance.
      *
@@ -61,14 +64,36 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Users
      */
     protected function create(array $data)
     {
-        return User::create([
+        // return Users::create([
+        //     'name' =>  $data['name'] ,
+        //     'email' =>  $data['email'],
+        //     'password' => bcrypt($data['password']), 
+        // ]);
+        
+        $user_id = DB::table('users')->insertGetId([
             'name' =>  $data['name'] ,
             'email' =>  $data['email'],
-            'password' => bcrypt($data['password']), //vì lúc nhập vào chỉ có chừng này data thôi, còn lại để null rồi
+            'password' => bcrypt($data['password']), 
         ]);
-    } //ok rồi đó, coi chỗ mã hóa password là ok
+        $user_role = DB::table('roles')->where('name','user')->first(); //lấy id của role user
+        
+        DB::table('user_role')->insert(['user_id' => $user_id,'role_id' => $user_role->id]); //
+			
+        return Users::find($user_id);
+    } 
+
+    public function register(\Illuminate\Http\Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+        
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user) ?: redirect($this->redirectPath());
+    }
 }

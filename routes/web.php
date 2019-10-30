@@ -15,7 +15,7 @@
 
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('welcome');
-Route::get('/home',function(){
+Route::get('/welcome',function(){
 	return redirect()->route('welcome');
 });
 
@@ -34,9 +34,5 @@ Route::get('/logout', 'Auth\LoginController@logout', function () {
 	return abort(404);
 });
 
-
-
-
-
 //ADMIN
-Route::get('admin/index', 'Admin\HomeController@index')->name('home');
+Route::get('admin', 'Admin\HomeController@index')->name('admin');

@@ -10,7 +10,7 @@ class DetailOrders extends Model
 {
     protected $table = 'detail_orders';
     protected $fillable = [
-    	'order_id', 'book_id', 'quantity', 'created_at', 'updated_at'
+    	'order_id', 'book_id', 'quantity', 'created_at', 'updated_at','delete_at'
     ];
     public function order(){
     	return $this->belongsTo(Orders::class,'order_id');

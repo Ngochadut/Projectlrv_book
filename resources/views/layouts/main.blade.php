@@ -122,12 +122,18 @@
                 <div id="responsive-nav">
                     <!-- NAV -->
                     <ul class="main-nav nav navbar-nav">
-                        <li class="active"><a href="{{ route('welcome') }}">Trang chủ</a></li>
+                        <li class="{{Request::is('welcome') ? 'active' : ''}}"><a href="{{ route('welcome') }}">Trang chủ</a></li>
                         <li><a href="#">Flash Sale</a></li>
                         <li><a href="#">B-POINT</a></li>
                         <li><a href="#">B-Blog</a></li>
-                    <li><a href="{{ route('bookStore') }}">B-POINT Store</a></li>
-                        <li><a href="#">B-ACOUNT</a></li>
+                        <li><a href="{{ route('bookStore') }}">B-POINT Store</a></li>
+                        @if(Auth::check())
+                            <li><a href="#">B-ACOUNT</a></li>
+                            <li><a href="{{ route('logout') }}">Logout</a></li>
+                        @else
+                            <li class="{{Request::is('login') ? 'active' : ''}}"><a href="{{ route('login') }}">Login</a></li>
+                            <li class="{{Request::is('register') ? 'active' : ''}}"><a href="{{ route('register') }}">Register</a></li>
+                        @endif
                     </ul>
                     <!-- /NAV -->
                 </div>

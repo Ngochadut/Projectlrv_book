@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+
 class CreateUsersTable extends Migration
 {
     /**
@@ -17,18 +18,19 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone');
-            $table->string('address');
-            $table->string('firstname');
-            $table->string('lastname');
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->bigInteger('active');
+            $table->bigInteger('active')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            $table->string('create_by');
-            $table->string('update_by');
-            $table->float('delete_flag');
+            $table->string('create_by')->nullable();
+            $table->string('update_by')->nullable();
+            $table->boolean('delete_at')->nullable();
+        
             //edit lan 1,xoa gender và thêm vào các cột
 
         });

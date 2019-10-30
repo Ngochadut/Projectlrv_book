@@ -9,7 +9,7 @@ class Author extends Model
 {
     protected $table = "author";
     protected $fillable = [
-         'product_id', 'name','img','address','describes','born','died','create_by','update_by','delete_flag'
+         'product_id', 'name','img','address','describes','born','died','create_by','update_by','delete_at'
     ];
     public function product(){
         return $this->hasMany(Product::class, 'user_id', 'id');

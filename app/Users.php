@@ -2,9 +2,11 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Users extends Model
+class Users extends Authenticatable
 {
     //
     use Notifiable;
@@ -14,7 +16,7 @@ class Users extends Model
      * @var array
      */
     protected $fillable = [
-        'name','email', 'password', 'phone','firstname', 'lastname', 'address', 'active','create_by','update_by','delete_flag'
+        'name','email', 'password', 'phone','firstname', 'lastname', 'address', 'active','create_by','update_by','delete_at'
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -32,5 +34,9 @@ class Users extends Model
   
     public function Orders(){
         return $this->hasMany('App\Order', 'user_id', 'id');
+    }
+
+    public function role(){
+        return $this->belongsTo('App\User_role','role_id','id');
     }
 }

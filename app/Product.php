@@ -9,7 +9,7 @@ class Product extends Model
 {
     protected $table = "product";
     protected $fillable = [
-    	'name', 'id_img', 'describes', 'published', 'author', 'price', 'maket_price','cover_type','num_page','SKU','size','number','category_id','create_by','update_by','delete_flag'
+    	'name', 'id_img', 'describes', 'published', 'author', 'price', 'maket_price','cover_type','num_page','SKU','size','number','category_id','create_by','update_by','delete_at'
     ];
     public function orderdetail(){
         return $this->hasMany(DetailOrders::class, 'product_id', 'id');

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use DB;
-use App\User;
-use App\Books;
+use App\Users;
+use App\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $new_books = Books::orderByDesc('updated_at')->take(10)->get();
+        $new_books = Product::orderByDesc('updated_at')->take(10)->get();
         return view('welcome',[
             'books' => $new_books
         ]);
@@ -44,7 +44,7 @@ class HomeController extends Controller
 
     public function register(Request $request)
     {
-        $tmp = User::create([
+        $tmp = Users::create([
             'name' => $request['name'] ,
             'email' => $request['email'],
             'phone' => $request['phone'],

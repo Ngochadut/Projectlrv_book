@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Books;
+use App\Product;
 
 use Illuminate\Http\Request;
 
@@ -10,7 +10,7 @@ class BookController extends Controller
     
     public function showBookDetailByID($id)
     {
-        $book = Books::find($id);
+        $book = Product::find($id);
 		if($book == null) abort(404);
         
         return view('bookDetail',[

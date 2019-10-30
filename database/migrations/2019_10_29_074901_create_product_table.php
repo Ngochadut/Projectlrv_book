@@ -17,8 +17,7 @@ class CreateProductTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('category_id')->unsigned();
             $table->string('name');
-            $table->string('describes');//mô tae
-            $table->string('id_img');
+            $table->longText('describes');//mô tar
             $table->string('publisher');//nhà xuất bản
             $table->string('author');//tác giả
             $table->integer('price');//giá
@@ -31,8 +30,8 @@ class CreateProductTable extends Migration
             $table->timestamps();
             $table->string('create_by');
             $table->string('update_by');
-            $table->float('delete_flag');//cờ
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->boolean('delete_at')->nullable();;
         });
     }
 
