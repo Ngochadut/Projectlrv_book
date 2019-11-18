@@ -56,7 +56,7 @@ class HomeController extends Controller
             'password' => \Hash::make($request['password']),
         ]);
         // dd($tmp);
-        // dd(DB::getQueryLog());
+    
         echo "Sign Up Success";
         return $tmp;
     }

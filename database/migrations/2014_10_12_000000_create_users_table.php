@@ -26,10 +26,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->bigInteger('active')->nullable();
             $table->rememberToken();
-            $table->timestamps();
             $table->string('create_by')->nullable();
             $table->string('update_by')->nullable();
-            $table->boolean('delete_at')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
         
             //edit lan 1,xoa gender và thêm vào các cột
 

@@ -19,7 +19,7 @@ class CreateProductTable extends Migration
             $table->string('name');
             $table->longText('describes');//mô tar
             $table->string('publisher');//nhà xuất bản
-            $table->string('author');//tác giả
+            $table->bigInteger('author_id')->unsigned();
             $table->integer('price');//giá
             $table->integer('maket_price');//giá thị trường
             $table->string('cover_type')->nullable();//loại bìa
@@ -27,11 +27,11 @@ class CreateProductTable extends Migration
             $table->string('SKU');//ma xuất bản
             $table->string('size');//size sách
             $table->integer('number');//số lượng
-            $table->timestamps();
             $table->string('create_by');
             $table->string('update_by');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->boolean('delete_at')->nullable();;
+            $table->timestamps(); 
+            $table->softDeletes();
         });
     }
 

@@ -17,11 +17,11 @@ class CreateImageTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('product_id')->unsigned();
             $table->string('name')->nullable();
-            $table->timestamps();
             $table->string('create_by');
             $table->string('update_by');
             $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
-            $table->boolean('delete_at')->nullable();
+            $table->timestamps(); 
+            $table->softDeletes();
         });
     }
 

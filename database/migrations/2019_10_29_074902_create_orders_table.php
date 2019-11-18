@@ -18,11 +18,11 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->string('note');
             $table->date('date_purchase');
-            $table->timestamps();
             $table->string('create_by');
             $table->string('update_by');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->boolean('delete_at')->nullable();;
+            $table->timestamps(); 
+            $table->softDeletes();
         });
     }
 

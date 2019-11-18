@@ -12,20 +12,23 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
-
+    <link type="text/css" href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    
     <!-- Slick -->
-    <link type="text/css" rel="stylesheet" href="css/slick.css"/>
-    <link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
+    <link type="text/css" href="{{ asset('css/slick.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ asset('css/slick-theme.css') }}" rel="stylesheet">
 
     <!-- nouislider -->
-    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
+    <link type="text/css" href="{{ asset('css/nouislider.min.css') }}" rel="stylesheet">
+ 
 
     <!-- Font Awesome Icon -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link type="text/css" href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+   
 
     <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+    <link type="text/css" href="{{ asset('css/style.css') }}" rel="stylesheet">
+   
     
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -184,12 +187,12 @@
     </footer>
     <!-- Footer -->
     <!-- jQuery Plugins -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/slick.min.js"></script>
-    <script src="js/nouislider.min.js"></script>
-    <script src="js/jquery.zoom.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/slick.min.js') }}"></script>
+    <script src="{{ asset('js/slick.min.js') }}"></script>
+    <script src="{{ asset('s/jquery.zoom.min.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
     @yield('cutom-js')
 </body>
 </html>

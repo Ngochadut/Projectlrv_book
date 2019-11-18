@@ -458,6 +458,12 @@ textarea.input {
   width: 270px;
   height: 90px;
 }
+.header-logoadmin .logo img {
+  display: block;
+  width: 500px;
+  height: 120px;
+}
+
 
 /*----------------------------*\
 	Search
@@ -477,13 +483,13 @@ textarea.input {
 }
 
 .header-search form .input {
-  width: calc(100% - 300px);
+  width: calc(100% - 350px);
   margin-right: -4px;
 }
 
 .header-search form .search-btn {
   height: 40px;
-  width: 70px;
+  width: 60px;
   background: #D10024;
   color: #FFF;
   font-weight: 700;

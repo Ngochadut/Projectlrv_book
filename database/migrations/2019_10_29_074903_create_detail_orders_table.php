@@ -19,12 +19,12 @@ class CreateDetailOrdersTable extends Migration
             $table->bigInteger('product_id')->unsigned();
             $table->integer('quantity');//số lượng
             $table->string('total_price');//tổng giá
-            $table->timestamps();
             $table->string('create_by');
             $table->string('update_by');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
-            $table->boolean('delete_at')->nullable();
+            $table->timestamps(); 
+            $table->softDeletes();
         });
     }
 

@@ -79,8 +79,9 @@ class RegisterController extends Controller
             'email' =>  $data['email'],
             'password' => bcrypt($data['password']), 
         ]);
+        // dd($user_id);
+        // dd($data);
         $user_role = DB::table('roles')->where('name','user')->first(); //lấy id của role user
-        
         DB::table('user_role')->insert(['user_id' => $user_id,'role_id' => $user_role->id]); //
 			
         return Users::find($user_id);

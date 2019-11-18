@@ -19,7 +19,7 @@ class ParentCategory extends Migration
             $table->string('create_by');
             $table->string('update_by');
             $table->timestamps(); 
-            $table->boolean('delete_at')->nullable();//hàm tạo cột create_at & update_at 
+            $table->softDeletes();
             // edit the first, add column (describes, create_by...)
         });
     }

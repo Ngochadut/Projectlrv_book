@@ -18,11 +18,11 @@ class CreateCategoriesTable extends Migration
             $table->bigInteger('parent_id')->unsigned();;
             $table->string('name');
             $table->longText('describes');
-            $table->timestamps();
             $table->string('create_by');
             $table->string('update_by');
             $table->foreign('parent_id')->references('id')->on('parent_category')->onDelete('cascade');
-            $table->boolean('delete_at')->nullable();
+            $table->timestamps(); 
+            $table->softDeletes();
             // edit the first, add column (describes, create_by...)
         });
     }

@@ -19,10 +19,10 @@ class CreateRattingsTable extends Migration
             $table->bigInteger('product_id')->unsigned();
             $table->integer('start_number');
             $table->longText('comment');
-            $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
-            $table->boolean('delete_at')->nullable();
+            $table->timestamps(); 
+            $table->softDeletes();
         });
     }
 

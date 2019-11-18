@@ -2,18 +2,20 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Author;
 use App\Categories;
 use App\Product;
 use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
     $ids = Categories::pluck('id');
+    $aids = Author::pluck('id');
     return [
         'category_id' => $faker->randomElement($ids),
         'name' => $faker->name, //goi du lieu tu thu vien fake
         'describes' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true), 
         'publisher' => $faker->name,
-        'author' => $faker->name, 
+        'author_id' => $faker->randomElement($aids),
         'price' => rand(1000000,2000000),
         'maket_price' => rand(1000000,2000000),
         'cover_type' => $faker->name,
