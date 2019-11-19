@@ -30,7 +30,7 @@
                             <div class="text-muted">Comments</div>
                         </div>
                     </div>
-                </div>
+                </div> 
                 <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
                     <div class="panel panel-orange panel-widget border-right">
                         <div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
@@ -89,7 +89,7 @@
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->phone}}</td>
                                         <td>
-                                        <button><a href="{{ route('detail',$user->id) }}">view</a></button>
+                                        <button><a href="{{ route('detailUser',$user->id) }}">view</a></button>
                                         <form action="{{ route('deleteUser',$user->id) }}" method="POST">
                                             @method('DELETE')
                                             @csrf
@@ -99,7 +99,7 @@
                                     </tr>
                                     @endforeach
                                 </tbody>
-                                <button type="button" class="btn btn-danger"><a href="{{ route('create') }}"> CREATE NEW MEMBER</a></button>
+                                <button type="button" class="btn btn-danger"><a href="{{route('create_user')}}"> CREATE NEW MEMBER</a></button>
                             </table>
 
                         </div>

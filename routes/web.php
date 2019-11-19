@@ -23,10 +23,10 @@ Route::get('/bookDetail/{id}','BookController@showBookDetailByID')->name('bookDe
 
 Route::get('/bookStore', 'HomeController@bookStore')->name('bookStore');
 
-Route::get('/account', 'HomeController@account')->name('account');
+Route::get('/account', 'AccountController@index')->name('account');
 
 Route::get('/checkOut', 'HomeController@checkOut')->name('checkOut');
-Route::get('/account', 'HomeController@account')->name('câount');
+
 
 Route::get('/logout', 'Auth\LoginController@logout', function () {
 	return abort(404);
@@ -93,14 +93,14 @@ Route::group(['middleware' => 'auth'], function(){
 			
 		});
 
-		//users
+		
 		Route::group(['prefix' => 'users'], function(){
-			Route::get('/create', 'Admin\UserController@create')->name('create');
-			Route::post('/create', 'Admin\UserController@store')-> name('createuser');
+			Route::get('/create', 'Admin\UserController@create')->name('create_user');
+			Route::post('/create', 'Admin\UserController@store')-> name('createUser');
 			Route::post('/edit', 'Admin\UserController@updateUser')->name('edituser');
-			Route::get('/{id}/detail', 'Admin\UserController@detail')->name('detail');
+			Route::get('/{id}/detail', 'Admin\UserController@detail')->name('detailUser');
 			Route::delete('{id}/delete','Admin\UserController@destroy')->name('deleteUser');
-			Route::get('/listuser', 'Admin\UserController@index')->name('listuser');
+			Route::get('/listuser', 'Admin\UserController@index')->name('admin');
 		});
 
 	});
