@@ -134,7 +134,7 @@
 @section('cutom-js')
 <script>
         $(document).ready(function () {
-            $('#changepass').click(function () {
+            $('#changepass').click(function () { 
                 if ($(this).is(':checked')) {
                     $('#newpass input').removeAttr('disabled');
                     $('#newpass').show('slow');

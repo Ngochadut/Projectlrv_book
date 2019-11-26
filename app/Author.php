@@ -3,14 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Product;
+use App\Image_author;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+ 
 class Author extends Model
 {
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
+    
 
     protected $table = "author";
 
@@ -20,5 +21,9 @@ class Author extends Model
 
     public function product(){
         return $this->hasMany(Product::class, 'user_id', 'id');
+    }
+
+    public function image_author(){
+        return $this->hasMany(Image_author::class,'author_id', 'id');
     }
 }

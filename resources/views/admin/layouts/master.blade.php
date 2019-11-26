@@ -18,7 +18,7 @@
     <!-- Bootstrap -->
     <link type="text/css" href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
-
+ 
     <!-- Slick -->
     <link type="text/css" href="{{ asset('css/slick.css') }}" rel="stylesheet">
     <link type="text/css" href="{{ asset('css/slick-theme.css') }}" rel="stylesheet">
@@ -77,7 +77,7 @@
                         <li><a href="{{ route('viewCategory') }}">CATEGORY</a></li>
                         <li><a href="{{ route('viewAuthor') }}">AUTHOR</a></li>
                         <li><a href="{{ route('viewProduct') }}">PRODUCT</a></li>
-                        <li><a href="#">CART</a></li>
+                        <li><a href="{{ route('viewCartManager') }}">CART MANAGER</a></li>
                         <li><a href="#}">SOCIETY</a></li>
                         @if(Auth::check())
                             <li><a href="#">B-ACOUNT</a></li>

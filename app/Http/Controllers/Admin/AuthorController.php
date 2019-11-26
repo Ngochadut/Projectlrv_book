@@ -6,6 +6,7 @@ use App\Author;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthorRequest;
+use App\Image_author;
 
 class AuthorController extends Controller
 {
@@ -21,11 +22,26 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
-        $data = array_merge($data,['update_by' => \Auth::user()->name,'create_by' => \Auth::user()->name]);
-        if($author = Author::create($data)){
-            return redirect()->route('create_author')->with(['class' => 'success', 'message' => 'Create new success !!.']);
-    	}
-        return redirect()->route('create_author')->with(['class' => 'error', 'message' => 'Wrong !!']);
+            $data = array_merge($data,['update_by' => \Auth::user()->name,'create_by' => \Auth::user()->name]);
+            if($author = Author::create($data)){
+                if($request->hasFile('imgs')) {
+                    $imageDatas = [];
+                    foreach(request()->file('imgs') as $image){
+                        $filename = '/images/author/'.md5(time()).'.jpg';
+                        $image->move(public_path('/images/author/'), $filename);
+                        $imageData = [
+                            'author_id' => $author->id,
+                            'name' => $filename,
+                            'update_by' => \Auth::user()->name,
+                            'create_by' => \Auth::user()->name
+                        ];
+                        array_push($imageDatas,$imageData);
+                    }
+                    Image_author::insert($imageDatas);
+                }
+                return redirect()->route('create_author')->with(['class' => 'success', 'message' => 'Create new success !!.']);
+            }
+            return redirect()->route('create_author')->with(['class' => 'error', 'message' => 'Wrong !!']);
     }
 
     public function edit($id){
@@ -36,25 +52,23 @@ class AuthorController extends Controller
     }
 
     public function updateAuthor(AuthorRequest $request){
-        
         $data = $request->except('_token', 'email');
-        if($user = Author::find($request->id)){
-            $data['password'] = isset($data['password']) ? bcrypt($data['password']) : $user->password;
-            if($request->hasFile('img')) {
-                $file = request()->file('img');
-                $filename = '/images/avatars/'.md5(time()).'.jpg';
-                $file->move(public_path('/images/avatars/'), $filename);
+        if($author = Author::find($request->id)){
+            if($request->hasFile('imgs')) {
+                $file = request()->file('imgs');
+                $filename = '/images/author/'.md5(time()).'.jpg';
+                $file->move(public_path('/images/author/'), $filename);
                 $data['image'] = $filename;
-                if(File::exists(public_path().$user->image)) {
-                    File::delete(public_path().$user->image);
-                }
+            if(File::exists(public_path().$author->image)) {
+                File::delete(public_path().$author->image);
             }
-            if ($user->update($data)) {
-                return redirect()->back()->with(['class' => 'success', 'message' => 'Update successfully !!']);
-            }else{
-                return redirect()->back()->with(['class' => 'error', 'message' => 'Update error !!']);
-            }}
-        
+        }
+        if ($author->update($data)) {
+            return redirect()->back()->with(['class' => 'success', 'message' => 'Update successfully !!']);
+        }else{
+            return redirect()->back()->with(['class' => 'error', 'message' => 'Update error !!']);
+            }
+        }    
         
     }
 
@@ -65,7 +79,7 @@ class AuthorController extends Controller
         }
         return redirect()->route('viewAuthor');
     }
-
+ 
     public function destroy($id){
         if($type = Author::find($id)){
             if($type->delete()){
@@ -73,5 +87,12 @@ class AuthorController extends Controller
             }
         }
         return redirect()->back()->with(['class' => 'error', 'message' => 'Delete wrong !!']);
+    }
+
+    public function search(Request $request){
+        $search = $request->get('search');
+        $author = Author::where('name', 'like', '%'. $search. '%')->paginate(3);
+        return view('admin.author.viewAuthor', ['authors'=> $author]); 
+       
     }
 }

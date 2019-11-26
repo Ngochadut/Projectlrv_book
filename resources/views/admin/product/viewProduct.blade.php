@@ -19,14 +19,21 @@
                                         Add New <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                         <div class="table-scrollable">
+                        <form action=" /searchProduct" method="get">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-md" name="search" placeholder="Search for..." />
+                                        <span class="input-group-btn"><button type="submit" class="btn btn-primary btn-md" >Search</button></span>
+                                    </div>
+                                </form>
                         <table class="table table-hover table-checkable order-column full-width" id="example4">
                             <thead>
                             
                                 <tr>
                                     <th class="center">ID</th>
+                                    <th class="center">Image</th>
                                     <th class="center"> Name Books </th>
                                     <th class="center"> Category </th>
                                     <th class="center"> Author</th>
@@ -35,16 +42,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($products as $product)
+                            @foreach($product_images as $product)
                                 <tr class="odd gradeX">
                                     <td class="center">{{$product->id}}</td>
+                                    
+                                    @if(count($product->images) > 0)
+                                    
+                                    @foreach($product_images->images as $image)
+                                    <td class="center"><img src="{{$image->name}}" alt="" height="150px" width="100px"></td>
+                                    @endforeach
+                                    @else
+                                    @dd($product->images)
+                                    <td class="center"><img src="/images/product/default.png" alt="" height="150px" width="100px"></td>
+                                    @endif
                                     <td class="center">{{$product->name}}</td>
                                     <td class="center">{{$product->Category['name']}}</td>
                                     <td class="center">{{$product->Author['name']}}</td>
                                     <td class="center">{{$product->price}}</td>
                                     <td class="center">
                                         <button><a href="{{route('detailProduct', $product->id)}}">view</a></button>
-                                        <form action="" method="POST">
+                                        <form action="{{ route('deleteProduct',$product->id) }}" method="POST"> 
                                             @method('DELETE')
                                             @csrf
                                             <button>Delete</button>
@@ -57,7 +74,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    {{ $products->links() }}
+                    {{ $product_images->links() }}
                 </div>	
             </div>
         </div>

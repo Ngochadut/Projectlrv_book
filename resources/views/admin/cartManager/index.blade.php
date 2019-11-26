@@ -1,9 +1,8 @@
 @extends('admin.layouts.master')
 
-@section('page-title','Type')
+@section('page-title','CartManager')
 
 @section('custom-css')
-@endsection
 
 @section('content')
 <body class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-white dark-sidebar-color logo-dark">
@@ -14,21 +13,12 @@
             <div class="col-md-12">
                 <div class="card card-box">
                     <div class="card-head">
-                        <h1>TYPE</h1>
+                        <h1>CART MANAGER</h1>
                     </div>
                     @if(session('class'))
 						<div class="alert bg-{{session('class')}}" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>{{session('message')}}</div>
 					@endif
                     <div class="card-body ">
-                        <div class="row p-b-20">
-                            <div class="col-md-6 col-sm-6 col-6">
-                                <div class="btn-group">
-                                    <a href="{{route('create_type')}}" id="addRow" class="btn btn-info">
-                                        Add New <i class="fa fa-plus"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                         <div class="table-scrollable">
                         <form action=" /searchType" method="get">
                                     <div class="input-group">
@@ -40,26 +30,26 @@
                             <thead>
                             
                                 <tr>
-                                    <th class="center">ID</th>
-                                    <th class="center"> Name Type </th>
-                                    <th class="center"> Action </th>
+                                    <th class="center">User Name</th>
+                                    <th class="center">Date Purchase</th>
+                                    <th class="center">Note</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($types as $type)
+                           
                                 <tr class="odd gradeX">
-                                    <td class="center">{{$type->id}}</td>
-                                    <td class="center">{{$type->name}}</td>
+                                    <td class="center"></td>
+                                    <td class="center"></td>
                                     <td class="center">
-                                        <button><a href="{{ route('detailType',$type->id) }}">view</a></button>
-                                        <form action="{{ route('deleteType',$type->id) }}" method="POST">
+                                        <button><a href="">view</a></button>
+                                        <form action="" method="POST">
                                             @method('DELETE')
                                             @csrf
                                             <button>Delete</button>
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                        
                             </tbody>
                         </table>
                     </div>
@@ -72,4 +62,5 @@
 
 @section('cutom-js')
 
+   
 @endsection

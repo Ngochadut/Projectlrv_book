@@ -49,8 +49,6 @@
                     <div class="product-preview">
                         <img src="https://product.hstatic.net/1000311467/product/tam-quang-ganh-lo-di-va-vui-song-1m4g3-qtcgja_simg_d0daf0_800x1200_max_master.jpg" alt="">
                     </div>
-
-                    
                 </div>
             </div>
             <!-- /Product thumb imgs -->
@@ -58,7 +56,8 @@
             <!-- Product details -->
             <div class="col-md-5">
                 <div class="product-details">
-                    <h2 class="product-name">product name goes here</h2>
+                @foreach($products as $product)
+                    <h2 class="product-name">{{$product->name}}</h2>
                     <div>
                         <div class="product-rating">
                             <i class="fa fa-star"></i>
@@ -100,7 +99,7 @@
                         <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                         <li><a href="#"><i class="fa fa-envelope"></i></a></li>
                     </ul>
-
+                @endforeach
                 </div>
             </div>
             <!-- /Product details -->
@@ -132,7 +131,12 @@
                         <div id="tab2" class="tab-pane fade in">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    <table>
+                                        <tr>
+                                        <th class="col-md-8">Hình thức  : </th>
+                                        <td class="data"> Bìa cứng </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>

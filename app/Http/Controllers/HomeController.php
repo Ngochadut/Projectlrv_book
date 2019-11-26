@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Image;
 use DB;
 use App\Users;
 use App\Product;
@@ -19,24 +20,21 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the application dashboard. 
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        $new_books = Product::orderByDesc('updated_at')->take(10)->get();
-        return view('welcome',[
-            'books' => $new_books
-        ]);
+        $products_newest = Product::orderByDesc('updated_at')->take(3)->get();
+        $products = Product::orderByDesc('updated_at')->take(10)->get();
+        return view('welcome', compact('products','products_newest'));
+    
     }
     
     
-    public function bookStore()
-    {
-        return view('bookStore');
-    }
     
+       
     public function checkOut()
     {
         return view('checkOut');

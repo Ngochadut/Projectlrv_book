@@ -10,11 +10,17 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			CREATE AUTHOR
-		</div>
+		</div> 
 		<div class="panel-body">
 		    <div class="row">
 				<form action="{{route('createAuthor')}}" method="post" enctype="multipart/form-data">
 				@csrf
+					<div class="col-lg-3">
+						<div class="form-group">
+							<label for="input-file">Image</label>
+							<input type="file" id="input-file" name="imgs[]" class="dropify" data-height="275px" data-default-file="{{asset('images/default.png')}}" multiple />
+						</div>
+					</div>
 					<div class="col-lg-9">
 					@if(session('class'))
 						<div class="alert bg-{{session('class')}}" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>{{session('message')}}</div>

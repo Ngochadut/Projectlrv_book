@@ -19,14 +19,24 @@ Route::get('/welcome',function(){
 	return redirect()->route('welcome');
 });
 
-Route::get('/bookDetail/{id}','BookController@showBookDetailByID')->name('bookDetail')->where('id', '[0-9]+');
+Route::get('/productDetail/{id}','ProductController@detailProduct')->name('productDetail')->where('id', '[0-9]+');
 
-Route::get('/bookStore', 'HomeController@bookStore')->name('bookStore');
 
-Route::get('/account', 'AccountController@index')->name('account');
+Route::get('/user/account','UserController@account')->name('account');
+Route::get('/user/edit','UserController@edit')->name('account_edit');
+Route::post('/user/edit','UserController@updateUser')->name('account_update');
 
+
+
+		
 Route::get('/checkOut', 'HomeController@checkOut')->name('checkOut');
 
+Route::get('/search', 'Admin\UserController@search');
+Route::get('/api/search', 'Admin\UserController@apiSearch')->name('seachapi');
+Route::get('/searchType', 'Admin\TypeController@search');
+Route::get('/searchCategory', 'Admin\CategoryController@search');
+Route::get('/searchProduct', 'Admin\ProductController@search');
+Route::get('/searchAuthor', 'Admin\AuthorController@search');
 
 Route::get('/logout', 'Auth\LoginController@logout', function () {
 	return abort(404);
@@ -66,10 +76,14 @@ Route::group(['middleware' => 'auth'], function(){
 			Route::post('/edit', 'Admin\CategoryController@updateCategory')->name('editcategory');
 			Route::get('/{id}/detail', 'Admin\CategoryController@detail')->name('detailCategory');
 			Route::delete('{id}/delete','Admin\CategoryController@destroy')->name('deleteCategory');
-			
-			
 		});
 
+		//cart manager
+		Route::group(['prefix' => 'cartManager'], function(){
+			Route::get('/view', 'Admin\CartManagerController@index')->name('viewCartManager');
+		});
+		
+	
 		//author
 		Route::group(['prefix' => 'author'], function(){
 			Route::get('/view', 'Admin\AuthorController@index')->name('viewAuthor');
@@ -93,7 +107,6 @@ Route::group(['middleware' => 'auth'], function(){
 			
 		});
 
-		
 		Route::group(['prefix' => 'users'], function(){
 			Route::get('/create', 'Admin\UserController@create')->name('create_user');
 			Route::post('/create', 'Admin\UserController@store')-> name('createUser');
@@ -101,6 +114,7 @@ Route::group(['middleware' => 'auth'], function(){
 			Route::get('/{id}/detail', 'Admin\UserController@detail')->name('detailUser');
 			Route::delete('{id}/delete','Admin\UserController@destroy')->name('deleteUser');
 			Route::get('/listuser', 'Admin\UserController@index')->name('admin');
+			
 		});
 
 	});

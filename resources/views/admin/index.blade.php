@@ -3,6 +3,7 @@
 @section('page-title','Admin')
 
 @section('custom-css')
+
 @endsection
 
 @section('content')
@@ -62,14 +63,12 @@
                         <div class="table-responsive">
                             <table class="table display product-overview mb-30" id="support_table5">
                                 <thead>
-                                <div class="panel-heading">
-                                    <form action="" method="GET">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control input-md" name="key" placeholder="Search for..." />
-                                            <span class="input-group-btn"><button type="submit" class="btn btn-primary btn-md" >Search</button></span>
-                                        </div>
-                                    </form>
-                                </div>
+                                <form action=" /search" method="get">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-md" name="search" placeholder="Search for..." />
+                                        <span class="input-group-btn"><button type="submit" class="btn btn-primary btn-md" >Search</button></span>
+                                    </div>
+                                </form>
                                     <tr>
                                         <th>No</th>
                                         <th>UserName</th>
@@ -117,5 +116,20 @@
 @endsection
 
 @section('cutom-js')
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript">
+   var path = "{{ route('seachapi') }}";
+    $('input.typeahead').typeahead({
+        source:  function (query, process) {
+        return $.get(path, { query: query }, function (data) {
+                return process(data);
+            });
+        }
+    });
+</script>
+
    
+</body>
+</html>
 @endsection

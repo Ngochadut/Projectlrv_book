@@ -27,6 +27,12 @@
                             </div>
                         </div>
                         <div class="table-scrollable">
+                        <form action=" /searchCategory" method="get">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-md" name="search" placeholder="Search for..." />
+                                <span class="input-group-btn"><button type="submit" class="btn btn-primary btn-md" >Search</button></span>
+                            </div>
+                        </form>
                         <table class="table table-hover table-checkable order-column full-width" id="example4">
                             <thead>
                             

@@ -17,10 +17,10 @@ class UserController extends Controller
     }
 
     public function create(){
-    	return view('admin.users.createUser');
+        return view('admin.users.createUser');
     }
 
-    public function store(EditUserByAdminRequest $request)
+    public function store(EditUserByAdminRequest $request)  
     {
         $data = $request->except('_token');
         $data = array_merge($data,['update_by' => \Auth::user()->name,'create_by' => \Auth::user()->name]);
@@ -31,8 +31,8 @@ class UserController extends Controller
     }
 
     public function edit($id){
-        if($user = Users::find($id)){
-            return view('admin.users.editUser', compact('user'));
+        if($users = Users::find($id)){
+            return view('admin.users.editUser', compact('users'));
         }
         return redirect()->route('create_user');
     }
@@ -59,7 +59,6 @@ class UserController extends Controller
         
         
     }
-
     
     public function detail($id){
         if($user = Users::find($id)){
@@ -75,5 +74,17 @@ class UserController extends Controller
             }
         }
         return redirect()->back()->with(['class' => 'error', 'message' => 'Delete wrong !!']);
+    }
+
+    // public function search(Request $request){
+    //     $search = $request->get('search');
+    //     $user = Users::where('name', 'like', '%'. $search. '%')->paginate(3);
+    //     return view('admin.index', ['users'=> $user]); 
+       
+    // }
+    public function search(Request $request){
+        $search = $request->get('search');
+        $users = Users::where('name', 'like', '%'. $search. '%')->orWhere('email', 'like', "%$search%")->orWhere('phone', 'like', "%$search%")->paginate(15);
+        return view('admin.index', compact('users'));
     }
 }

@@ -15,7 +15,7 @@
                 <div class="card card-box">
                     <div class="card-head">
                         <h1>Author</h1>
-                    </div>
+                </div>
                     <div class="card-body ">
                         <div class="row p-b-20">
                             <div class="col-md-6 col-sm-6 col-6">
@@ -27,21 +27,33 @@
                             </div>
                         </div>
                         <div class="table-scrollable">
+                        <form action=" /searchAuthor" method="get">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-md" name="search" placeholder="Search for..." />
+                                        <span class="input-group-btn"><button type="submit" class="btn btn-primary btn-md" >Search</button></span>
+                                    </div>
+                                </form>
                         <table class="table table-hover table-checkable order-column full-width" id="example4">
                             <thead>
                             
                                 <tr>
                                     <th class="center">ID</th>
-                                    <th class="center"> Name </th>
+                                    <th class="center"> Image </th>
+                                    <th class="center">Name</th>
                                     <th class="center"> Describes </th>
                                     <th class="center"> Action </th>
 
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody> 
                             @foreach($authors as $author)
                                 <tr class="odd gradeX">
                                     <td class="center">{{$author->id}}</td>
+                                    @if(count($author->image_author) > 0)
+                                    <td class="center"><img src="{{$author->image_author->first()->name}}" alt="" height="150px" width="100px"></td>
+                                    @else
+                                    <td class="center"><img src="/images/author/default.png" alt="" height="150px" width="100px"></td>
+                                    @endif
                                     <td class="center">{{$author->name}}</td>
                                     <td class="center">{{$author->describes}}</td>
                                     <td class="center">

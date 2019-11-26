@@ -75,6 +75,12 @@ class CategoryController extends Controller
         return redirect()->back()->with(['class' => 'error', 'message' => 'Delete wrong !!']);
     }
     
+    public function search(Request $request){
+        $search = $request->get('search');
+        $category = Categories::where('name', 'like', '%'. $search. '%')->paginate(3);
+        return view('admin.category.viewCategory', ['categorys'=> $category]); 
+       
+    }
 
 
    

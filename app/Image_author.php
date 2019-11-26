@@ -1,23 +1,22 @@
 <?php
 
 namespace App;
-use App\Product;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
-class Image extends Model
+class Image_author extends Model
 {
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
 
-    protected $table = "image";
+    protected $table = "image_author";
 
     protected $fillable = [
-        'product_id', 'name','create_by','update_by','delete_at'
+        'author_id', 'name','create_by','update_by','delete_at'
     ];
 
     public function product(){
-        return $this->belongsTo(Product::class, 'name', 'id');
+        return $this->belongsTo(Author::class, 'user_id', 'id');
     }
 }

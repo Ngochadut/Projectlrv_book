@@ -1,9 +1,8 @@
 @extends('admin.layouts.master')
 
-@section('page-title','EditAuthor')
+@section('page-title','EditProduct')
 
-@section('custom-css')
-
+@section('custom-css')>
 
 @endsection
 
@@ -19,14 +18,22 @@
 			<div class="row">
 				<form action="{{route('createProduct')}}" method="post" enctype="multipart/form-data">
 					@csrf
-					<div class="col-lg-3">
-								<div class="form-group">
-									<label for="input-file">Image</label>
-									<input type="file" id="input-file" name="img" class="dropify" data-height="275px" data-default-file="{{asset('images/default.png')}}" />
-								</div>
-							</div>
+					<div class="col-lg-3" style="word-wrap: break-word">
+						<div class="form-group">
+							@if(count($product->images) > 0)
+								@foreach($product->images as $image)
+								<td class="center"><img src="{{$image->name}}" alt="" height="200px" width="150px"></td>
+								</form>
+								<hr>
+								@endforeach
+							@else
+							<td class="center"><img src="/images/product/default.png" alt="" height="150px" width="100px"></td>
+							@endif
+						</div>
+					</div>
 					<div class="col-lg-9">
 						@if(session('class'))
+					
 						<div class="alert bg-{{session('class')}}" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>{{session('message')}}</div>
 						@endif
 						@if($errors->any())
