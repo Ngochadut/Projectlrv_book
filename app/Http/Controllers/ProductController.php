@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Categories;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -9,16 +10,20 @@ class ProductController extends Controller
 {
        
     public function index(){
-        $products = Product::orderByDesc('updated_at')->take(10)->get();
+        $products = Product::with(['images:product_id,name'])->take(10)->get();
         return view('welcome', compact('products'));
     }
-
+ 
     public function detailProduct($id){
-        $product = Product::find($id);
-		if($product == null) abort(404);
-        
-        return view('productDetail',[
-            'products' => $product
-        ]);
+        $products_view = Product::find($id)->load('images');
+        $product_category = Product::with(['images:product_id,name'])->orderByDesc('updated_at')->take(4)->get();
+        // dd($products_view);
+        return view('productDetail',compact('products_view','product_category'));
+    }
+
+    public function productStore(){
+        $categorys = Categories::all()->take(5);
+        $products = Product::with(['images:product_id,name'])->take(9)->get();
+        return view('productStore',compact('categorys','products'));
     }
 } 

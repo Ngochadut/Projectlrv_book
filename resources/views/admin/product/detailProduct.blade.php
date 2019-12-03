@@ -14,7 +14,7 @@
 				<div class="panel-heading">
 					DETAIL PRODUCT
 				</div>
-				<div class="panel-body">
+				<div class="panel-body"> 
 			<div class="row">
 				<form action="{{route('createProduct')}}" method="post" enctype="multipart/form-data">
 					@csrf

@@ -6,7 +6,7 @@
 
 @endsection
   
-@section('content')
+@section('content') 
     <!-- SECTION -->
     <div class="section">
         <!-- container --> 
@@ -18,11 +18,13 @@
             <div class="col-md-4 col-xs-6">
                     <div class="shop">
                         <div class="shop-img">
-                            @if(count($product->images) > 0)
-                            <td class="center"><img src="{{$product->images->first()->name}}" alt="" height="400px" width="2px"></td>
-                            @else
-                            <td class="center"><img src="/images/product/default.png" alt="" height="150px" width="100px"></td>
-                            @endif
+                        @if(count($product->getRelations()['images'])>0)
+                        @foreach($product->getRelations()['images'] as $image)
+                        <td class="center"><img src="{{$image->name}}" alt="" height="400px" width="5px"></td>
+                        @endforeach
+                        @else
+                        <td class="center"><img src="/images/product/default.png" alt="" height="150px" width="100px"></td>
+                        @endif
                         </div>
                         <div class="shop-body">
                             <a href="" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
@@ -69,14 +71,14 @@
                                         <td class="center"><img src="/images/product/default.png" alt="" height="150px" width="100px"></td>
                                         @endif
                                             <div class="product-label">
-                                                <span class="sale">-30%</span>
+                                                <span class="sale">-30%</span> 
                                                 <span class="new">NEW</span>
                                             </div>
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">{{$product->Category['name']}}</p>
                                             <h3 class="product-name"><a href="#">{{$product->name}}</a></h3>
-                                            <h4 class="product-price">{{$product->price}} <del class="product-old-price">{{$product->price}}</del></h4>
+                                            <h4 class="product-price">{{$product->price}} <del class="product-old-price">{{$product->maket_price}}</del></h4>
                                             <div class="product-rating">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
@@ -86,12 +88,12 @@
                                             </div>
                                             <div class="product-btns">
                                                 <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to comment</span></button>
+                                                <button class="add-to-compare"><i class="fa fa-exchange" data-book-id="{{$product->id}}"></i><span class="tooltipp">add to comment</span></button>
                                                 <a href="{{ route('productDetail',$product->id) }}"><button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button></a>
                                             </div>
-                                        </div>
+                                        </div> 
                                         <div class="add-to-cart">
-                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+                                            <button class="add-to-cart-btn btn_add_to_cart"  data-product-id="{{$product->id}}"><i class="fa fa-shopping-cart"></i> Add to cart</button>
                                         </div>
                                     </div>
                                     @endforeach
@@ -616,7 +618,11 @@
 @endsection
 
 @section('cutom-js')
-
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/home.js') }}"></script>
 @endsection
 
 

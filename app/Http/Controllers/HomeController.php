@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
+    /** 
      * Create a new controller instance.
      *
      * @return void
@@ -26,8 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products_newest = Product::orderByDesc('updated_at')->take(3)->get();
-        $products = Product::orderByDesc('updated_at')->take(10)->get();
+        $products_newest = Product::with(['images:product_id,name'])->orderByDesc('updated_at')->take(3)->get();
+        $products = Product::with(['images:product_id,name'])->orderByDesc('updated_at')->take(10)->get();
         return view('welcome', compact('products','products_newest'));
     
     }

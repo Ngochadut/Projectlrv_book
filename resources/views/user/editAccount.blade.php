@@ -128,14 +128,6 @@
                             </ul>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-default btn-md pull-right">Save Change</button>
-                    </div>
-                    <div>
-                        <p class="help"><i class="required">(*)</i> : Required Input !</p>
-                        <p class="help">Click avatar to change your avatar !</p>
-                    </div>
                 </div>
                     </form></div></div></div></div></div></div></div>
 @endsection

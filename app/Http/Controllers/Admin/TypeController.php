@@ -19,7 +19,7 @@ class TypeController extends Controller
     }
 
     public function create(){
-    	return view('admin.type.createType');
+    	return view('admin.type.createType'); 
     }
 
     public function store(TypeRequest $request)

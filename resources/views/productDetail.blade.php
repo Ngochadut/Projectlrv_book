@@ -3,7 +3,7 @@
 @section('page-title','Home')
 
 @section('custom-css')
-
+ 
 @endsection
 
 @section('content')
@@ -16,48 +16,41 @@
         <!-- row -->
         <div class="row">
             <!-- Product main img -->
-            <div class="col-md-5 col-md-push-2">
+            <div class="col-md-5 col-md-push-2"> 
                 <div id="product-main-img">
-                    <div class="product-preview">
-                        <img src="./img/product01.png" alt="">
-                    </div>
-                    <div class="product-preview">
-                        <img src="./img/product03.png" alt="">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="./img/product06.png" alt="">
-                    </div>
-                    <div class="product-preview">
-                        <img src="./img/product08.png" alt="">
-                    </div>
-                </div>
+                
+                @foreach($products_view->images as $image)
+                    @if(count($products_view->images) > 0)
+                        <td class="product-preview"><img src="{{$image->name}}" alt="" height="250px" width="2px"></td>
+                    @else
+                        <td class="center"><img src="/images/product/default.png" alt="" height="150px" width="100px"></td>
+                    @endif
+                @endforeach
+                  </div>
             </div>
             <!-- /Product main img -->
 
             <!-- Product thumb imgs -->
             <div class="col-md-2  col-md-pull-5">
                 <div id="product-imgs">
+                @foreach($products_view->images as $image)
+                    @if(count($products_view->images)>0)
                     <div class="product-preview">
-                        <img src="https://salt.tikicdn.com/cache/550x550/ts/product/2e/eb/ad/9558a365adde6688d4c71a200d78310c.jpg" alt="">
+                        <img src="{{$image->name}}" alt="" height="150px" width="100px">
                     </div>
-
-                    <div class="product-preview">
-                        <img src="https://nhanvan.vn/images/detailed/62/%C4%90%E1%BA%AFc_Nh%C3%A2n_T%C3%A2m__B%C3%ACa_C%E1%BB%A9ng_.jpeg" alt="">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="https://product.hstatic.net/1000311467/product/tam-quang-ganh-lo-di-va-vui-song-1m4g3-qtcgja_simg_d0daf0_800x1200_max_master.jpg" alt="">
-                    </div>
+                    @else
+                    <td class="center"><img src="/images/product/default.png" alt="" height="150px" width="100px"></td>
+                    @endif
+                @endforeach
                 </div>
             </div>
             <!-- /Product thumb imgs -->
 
             <!-- Product details -->
             <div class="col-md-5">
+            
                 <div class="product-details">
-                @foreach($products as $product)
-                    <h2 class="product-name">{{$product->name}}</h2>
+                    <h2 class="product-name"></h2>
                     <div>
                         <div class="product-rating">
                             <i class="fa fa-star"></i>
@@ -69,22 +62,19 @@
                         <a class="review-link" href="#">10 Review(s) | Add your review</a>
                     </div>
                     <div>
-                        <h3 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h3>
-                        <span class="product-available">In Stock</span>
+                        <h3 class="product-price">{{$products_view->price}}<del class="product-old-price">{{$products_view->maket_price}}</del></h3>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p>{{$products_view->describes}}</p>
 
                     <div class="product-options">
                         <label>
-                            Số lượng
-                            <select class="input-select">
-                                <option value="0">X</option>
-                            </select>
+                            Number
+                            <input class="form-control" type="number" id="product_quantity" value="1" min="1" max="5" onKeyDown="return false">
                         </label>
                     </div>
 
                     <div class="add-to-cart">
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>BUY NOW</button>
+                        <button class="add-to-cart-btn btn_add_to_cart"  data-product-id="{{$products_view->id}}"><i class="fa fa-shopping-cart"></i>BUY NOW</button>
                     </div>
 
                     <ul class="product-btns">
@@ -99,19 +89,21 @@
                         <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                         <li><a href="#"><i class="fa fa-envelope"></i></a></li>
                     </ul>
-                @endforeach
+   
                 </div>
+              
             </div>
             <!-- /Product details -->
 
             <!-- Product tab -->
             <div class="col-md-12">
+          
                 <div id="product-tab">
                     <!-- product tab nav -->
                     <ul class="tab-nav">
                         <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
                         <li><a data-toggle="tab" href="#tab2">Details</a></li>
-                        <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+                        <li><a data-toggle="tab" href="#tab3">Reviews</a></li>
                     </ul>
                     <!-- /product tab nav -->
 
@@ -121,7 +113,7 @@
                         <div id="tab1" class="tab-pane fade in active">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    <p>{{$products_view->describes}}</p>
                                 </div>
                             </div>
                         </div>
@@ -131,11 +123,40 @@
                         <div id="tab2" class="tab-pane fade in">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table>
+                                    <table style="border: 1px solid black; border-collapse: collapse;">
                                         <tr>
-                                        <th class="col-md-8">Hình thức  : </th>
-                                        <td class="data"> Bìa cứng </td>
+                                        <th class="col-md-3"> Name :<td class="data">" {{$products_view->name}} "</td></th>
                                         </tr>
+                                        <tr>
+                                        <th  class="col-md-3">Describes :<td class="data">{{$products_view->describes}}</td></th>
+                                        </tr>
+                                        <tr>
+                                        <th  class="col-md-3">Publisher :<td class="data">{{$products_view->publisher}}</td></th>
+                                        </tr>
+                                        <tr>
+                                        <th  class="col-md-3">Author :<td class="data">{{$products_view->Author['name']}}</td></th>
+                                        </tr>
+                                        <tr>
+                                        <th  class="col-md-3">Categories :<td class="data">{{$products_view->Category['name']}}</td></th>
+                                        </tr>
+                                        <tr>
+                                        <th  class="col-md-3">Price :<td class="data">{{$products_view->price}}</td></th>
+                                        </tr>
+                                        <tr>
+                                        <th  class="col-md-3">Maket Price :<td class="data">{{$products_view->maket_price}}</td></th>
+                                        </tr>
+                                        <tr>
+                                        <th  class="col-md-3">Cover type :<td class="data">{{$products_view->cover_type}}</td></th>
+                                        </tr>  
+                                        <tr>
+                                        <th  class="col-md-3">Numpage :<td class="data">{{$products_view->num_page}}</td></th>
+                                        </tr> 
+                                        <tr>
+                                        <th class="col-md-3">SKU :<td class="data">{{$products_view->SKU}}</td></th>
+                                        </tr>    
+                                        <tr>
+                                        <th class="col-md-3">Size<td class="data">{{$products_view->size}}</td></th>
+                                        </tr>                              
                                     </table>
                                 </div>
                             </div>
@@ -229,7 +250,7 @@
                                 </div>
                                 <!-- /Rating -->
 
-                                <!-- Reviews -->
+                                 <!-- Reviews -->
                                 <div class="col-md-6">
                                     <div id="reviews">
                                         <ul class="reviews">
@@ -322,6 +343,7 @@
                     <!-- /product tab content  -->
                 </div>
             </div>
+         
             <!-- /product tab -->
         </div>
 				<!-- /row -->
@@ -339,23 +361,27 @@
 
             <div class="col-md-12">
                 <div class="section-title text-center">
-                    <h3 class="title">Related Products</h3>
+                    <h3 class="title">Category</h3>
                 </div>
             </div>
-
             <!-- product -->
+            @foreach($product_category as $product)
             <div class="col-md-3 col-xs-6">
                 <div class="product">
+                    @if(count($product->images) > 0)
                     <div class="product-img">
-                        <img src="http://placehold.it/200x240" alt="">
-                        <div class="product-label">
+                        <img src="{{$product->images->first()->name}}" alt=""height="300px" width="70px">
+                        <div class="product-label"> 
                             <span class="sale">-30%</span>
                         </div>
                     </div>
+                    @else
+                    <td class="center"><img src="/images/product/default.png" alt="" height="300px" width="100px"></td>
+                    @endif
                     <div class="product-body">
-                        <p class="product-category">Category</p>
-                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                        <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                        <p class="product-category">{{$product->Category['name']}}</p>
+                        <h3 class="product-name">{{$product->name}}<a href="#"></a></h3>
+                        <h4 class="product-price">{{$product->price}} <del class="product-old-price">$990.00</del></h4>
                         <div class="product-rating">
                         </div>
                         <div class="product-btns">
@@ -367,107 +393,21 @@
                     <div class="add-to-cart">
                         <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                     </div>
+               
                 </div>
             </div>
+            @endforeach
             <!-- /product -->
-
-            <!-- product -->
-            <div class="col-md-3 col-xs-6">
-                <div class="product">
-                    <div class="product-img">
-                        <img src="http://placehold.it/200x240" alt="">
-                        <div class="product-label">
-                            <span class="new">NEW</span>
-                        </div>
-                    </div>
-                    <div class="product-body">
-                        <p class="product-category">Category</p>
-                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                        <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                        <div class="product-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product-btns">
-                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                        </div>
-                    </div>
-                    <div class="add-to-cart">
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                    </div>
-                </div>
-            </div>
-            <!-- /product -->
-
-            <div class="clearfix visible-sm visible-xs"></div>
-
-            <!-- product -->
-            <div class="col-md-3 col-xs-6">
-                <div class="product">
-                    <div class="product-img">
-                        <img src="http://placehold.it/200x240" alt="">
-                    </div>
-                    <div class="product-body">
-                        <p class="product-category">Category</p>
-                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                        <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                        <div class="product-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                        </div>
-                        <div class="product-btns">
-                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                        </div>
-                    </div>
-                        <div class="add-to-cart">
-                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- /product -->
-
-                <!-- product -->
-                <div class="col-md-3 col-xs-6">
-                    <div class="product">
-                        <div class="product-img">
-                            <img src="http://placehold.it/200x240" alt="">
-                        </div>
-                        <div class="product-body">
-                            <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                            <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            <div class="product-rating">
-                            </div>
-                            <div class="product-btns">
-                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                            </div>
-                        </div>
-                        <div class="add-to-cart">
-                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- /product -->
             </div>
             <!-- /row -->
         </div>
         <!-- /container -->
     </div>
+
     <!-- /Section -->	        
 @endsection
 
 @section('cutom-js')
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/home.js') }}"></script>
 @endsection

@@ -10,9 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('welcome');
 Route::get('/welcome',function(){
@@ -20,16 +17,11 @@ Route::get('/welcome',function(){
 });
 
 Route::get('/productDetail/{id}','ProductController@detailProduct')->name('productDetail')->where('id', '[0-9]+');
-
+Route::get('/productStore','ProductController@productStore')->name('productStore');
 
 Route::get('/user/account','UserController@account')->name('account');
 Route::get('/user/edit','UserController@edit')->name('account_edit');
 Route::post('/user/edit','UserController@updateUser')->name('account_update');
-
-
-
-		
-Route::get('/checkOut', 'HomeController@checkOut')->name('checkOut');
 
 Route::get('/search', 'Admin\UserController@search');
 Route::get('/api/search', 'Admin\UserController@apiSearch')->name('seachapi');
@@ -42,33 +34,48 @@ Route::get('/logout', 'Auth\LoginController@logout', function () {
 	return abort(404);
 });
 
+//Cart
+Route::group(['prefix' => 'cart'], function(){
+	Route::get('/checkOut', 'CartController@cart')->name('checkOut'); 
+	Route::get('/addToCart/{id}','CartController@addToCart');
+	Route::get('/remove/{id}','CartController@remove');
+	Route::get('/delete/{id}','CartController@delete')->name('delete');
+	Route::get('/waitOrder', 'CartController@waitOrder')->name('waitOrder');
+	Route::get('/confirmed', 'CartController@confirmed')->name('confirmed');
+	Route::get('submit','CartController@submit_cart')->name('submit_cart')->middleware('auth');
+	Route::get('/add_to_cart/{di}','CartController@apiAddToCart'); // API
+});
+
 //Dang nhap
 
 Route::group(['middleware' => 'auth'], function(){
-	//user
+	//User
 	Route::group(['prefix' => 'admin','middleware' => 'admin'], function(){
 		//vai bua lam edit user sau
 	});
 
-	
 	//Admin
 	Route::group(['prefix' => 'admin','middleware' => 'admin'], function(){
-
 		Route::get('/', 'Admin\UserController@index')->name('admin');
 
 		//Type
 		Route::group(['prefix' => 'type'], function(){
-			
 			Route::get('/create', 'Admin\TypeController@create')->name('create_type');
 			Route::post('/create', 'Admin\TypeController@store')-> name('createtype');
 			Route::get('/view', 'Admin\TypeController@index')->name('viewType');
 			Route::post('/edit', 'Admin\TypeController@updateType')->name('edittype');
 			Route::get('/{id}/detail', 'Admin\TypeController@detail')->name('detailType');
 			Route::delete('{id}/delete','Admin\TypeController@destroy')->name('deleteType');
-		
-			
 		});
-		//category
+
+		//Commit
+		Route::group(['prefix' => 'comment'], function(){
+			Route::get('/list', 'Admin\RatingController@index')->name('Comment.List');
+			Route::get('/search', 'Admin\RatingController@search')->name('Comment.Search');
+			Route::delete('/deleted', 'Admin\RatingController@destroy');
+		});
+
+		//Category
 		Route::group(['prefix' => 'category'], function(){
 			Route::get('/view', 'Admin\CategoryController@index')->name('viewCategory');
 			Route::get('/create', 'Admin\CategoryController@create')->name('create_category');
@@ -78,13 +85,12 @@ Route::group(['middleware' => 'auth'], function(){
 			Route::delete('{id}/delete','Admin\CategoryController@destroy')->name('deleteCategory');
 		});
 
-		//cart manager
+		//Cart manager
 		Route::group(['prefix' => 'cartManager'], function(){
 			Route::get('/view', 'Admin\CartManagerController@index')->name('viewCartManager');
 		});
 		
-	
-		//author
+		//Author
 		Route::group(['prefix' => 'author'], function(){
 			Route::get('/view', 'Admin\AuthorController@index')->name('viewAuthor');
 			Route::get('/create', 'Admin\AuthorController@create')->name('create_author');
@@ -94,9 +100,8 @@ Route::group(['middleware' => 'auth'], function(){
 			Route::delete('{id}/delete','Admin\AuthorController@destroy')->name('deleteAuthor');
 			
 		});
-	
 
-		//product
+		//Product
 		Route::group(['prefix' => 'product'], function(){
 			Route::get('/view', 'Admin\ProductController@index')->name('viewProduct');
 			Route::get('/create', 'Admin\ProductController@create')->name('create_product');
@@ -107,6 +112,7 @@ Route::group(['middleware' => 'auth'], function(){
 			
 		});
 
+		//Users
 		Route::group(['prefix' => 'users'], function(){
 			Route::get('/create', 'Admin\UserController@create')->name('create_user');
 			Route::post('/create', 'Admin\UserController@store')-> name('createUser');
@@ -116,6 +122,5 @@ Route::group(['middleware' => 'auth'], function(){
 			Route::get('/listuser', 'Admin\UserController@index')->name('admin');
 			
 		});
-
 	});
 });

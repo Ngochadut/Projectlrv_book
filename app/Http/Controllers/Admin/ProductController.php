@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     public function index(){
-        $product_images = Product::with(array('images:name'))->paginate(15);
+        $product_images = Product::with(['images:product_id,name'])->paginate(15);
         // $product_images = DB::table('product')->join('image')->get();
         
         //  dd($product_images); 
@@ -35,11 +35,11 @@ class ProductController extends Controller
     {
         $data = $request->except('_token');
         $data = array_merge($data,['update_by' => \Auth::user()->name,'create_by' => \Auth::user()->name]);
-        if($product = Product::create($data)){
+         if($product = Product::create($data)){
             if($request->hasFile('imgs')) {
                 $imageDatas = [];
                 foreach(request()->file('imgs') as $image){
-                    $filename = '/images/product/'.md5(time()).'.jpg';
+                   $filename = '/images/product/'.md5(time()).'.jpg';
                     $image->move(public_path('/images/product/'), $filename);
                     $imageData = [
                         'product_id' => $product->id,

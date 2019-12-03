@@ -129,7 +129,7 @@
                         <li><a href="#">Flash Sale</a></li>
                         <li><a href="#">B-POINT</a></li>
                         <li><a href="#">B-Blog</a></li>
-                        <li><a href="">B-POINT Store</a></li>
+                        <li><a href="{{ route('productStore') }}">B-POINT Store</a></li>
                         @if(Auth::check())
                             <li><a href="{{ route('account') }}">B-ACOUNT</a></li>
                             <li><a href="{{ route('logout') }}">Logout</a></li>
@@ -157,7 +157,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="newsletter">
-                            <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+                            <p>Sign Up for the <strong>BOOKSTORE</strong></p>
                             <form>
                                 <input class="input" type="email" placeholder="Enter Your Email">
                                 <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>

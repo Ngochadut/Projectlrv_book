@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->string('create_by')->nullable();
             $table->string('update_by')->nullable();
+            $table->text('temporatyOrder')->nullable();
             $table->timestamps();
             $table->softDeletes();
         

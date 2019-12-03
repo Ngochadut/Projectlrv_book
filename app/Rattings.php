@@ -12,7 +12,7 @@ class Rattings extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $table = "ratings";
+    protected $table = "rattings";
 
     protected $fillable = [
     	'user_id', 'product_id', 'star_number', 'comment','create_by','update_by','delete_at'
