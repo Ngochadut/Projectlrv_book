@@ -83,7 +83,7 @@ class RegisterController extends Controller
         // dd($data);
         $user_role = DB::table('roles')->where('name','user')->first(); //lấy id của role user
         DB::table('user_role')->insert(['user_id' => $user_id,'role_id' => $user_role->id]); //
-			
+			 
         return Users::find($user_id);
     } 
 
