@@ -16,12 +16,13 @@ class DetailOrders extends Model
     protected $table = 'detail_orders';
 
     protected $fillable = [
-    	'order_id', 'book_id', 'quantity', 'created_at', 'updated_at','delete_at'
+    	'id','order_id', 'product_id','total_price', 'quantity', 'created_at', 'updated_at','delete_at'
     ];
     public function order(){
     	return $this->belongsTo(Orders::class,'order_id');
     }
     public function product(){
-    	return $this->belongsTo(Product::class,'book_id');
+    	return $this->belongsTo(Product::class,'product_id');
     }
+    
 }

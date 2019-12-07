@@ -31,6 +31,8 @@
 <div class="section">
 	<!-- container -->
 	<div class="container">
+	<form action="{{route('submit_cart')}}" method="post">
+		@csrf
 		<!-- row -->
 		<div class="row">
 			<div class="col-md-7">
@@ -97,7 +99,7 @@
 
 				<!-- Order notes -->
 				<div class="order-notes">
-					<textarea class="input" placeholder="Order Notes"></textarea>
+					<textarea class="input" name="note" placeholder="Order Notes"></textarea>
 				</div>
 				<!-- /Order notes -->
 			</div>
@@ -116,13 +118,15 @@
 					<div class="order-products">
 						<div class="order-col">
 							<div data-product-id="{{$product->id}}">
-								<button class="add-to-cart-btn btn_delete"  data-product-id="{{$product->id}}"> Delete</button>
+							<button class="add-to-cart-btn btn_delete"  data-product-id="{{$product->id}}"><i class="fa fa-trash"></i></button>
 								<button class="add-to-cart-btn btn_decreament"  data-product-id="{{$product->id}}">-</button>
-								<a id='quantity' data-product-id="{{$product->id}}">{{$product->quaility}}</a>
+								<span id='quantity' data-product-id="{{$product->id}}">{{$product->quaility}}</span>
+								<input type="text" name="quantity" value="{{$product->quantity}}" hidden>
 								<button class="add-to-cart-btn btn_increament"  data-product-id="{{$product->id}}">+</button>
 								 x {{$product->name}}
 							 </div>
 							<div>{{$product->productTotal}}</div>
+							
 						</div>
 					</div>
 					@endforeach
@@ -167,10 +171,12 @@
 						</div>
 					</div>
 				</div>
-				<a href="#" class="primary-btn order-submit">Place order</a>
+			
+				<button type="submit"  class="primary-btn order-submit">Place order</button>
 			</div>
 			<!-- /Order Details -->
 		</div>
+		</form>
 		<!-- /row -->
 	</div>
 	<!-- /container -->

@@ -3,8 +3,8 @@
 @section('page-title','Create Type')
 
 @section('custom-css')
-
-@section('content')
+  
+@section('content') 
 <div class="container">
 <div class="row">
 		<div class="col-md-12">

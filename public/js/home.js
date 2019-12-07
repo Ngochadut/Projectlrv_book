@@ -2,10 +2,9 @@ $(document).ready(function () {
   $(".btn_add_to_cart").click(function () {
     let id = $(this).attr("data-product-id");
     let quantity = $("#product_quantity").val();
-    // alert('Ban da them product ' + id + ' ' + quantity);
     if(quantity == null) quantity = 1;
 
-      $.ajax({
+      $.ajax({ 
         url: `http://127.0.0.1:8000/cart/add_to_cart/${id}?quantity=${quantity}`,
         type: 'GET', 
         success: function(data){

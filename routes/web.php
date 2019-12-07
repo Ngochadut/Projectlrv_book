@@ -10,7 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 Auth::routes();
+Auth::routes(['verify' => true]);
 Route::get('/', 'HomeController@index')->name('welcome');
 Route::get('/welcome',function(){
 	return redirect()->route('welcome');
@@ -38,13 +41,22 @@ Route::get('/logout', 'Auth\LoginController@logout', function () {
 Route::group(['prefix' => 'cart'], function(){
 	Route::get('/checkOut', 'CartController@cart')->name('checkOut'); 
 	Route::get('/addToCart/{id}','CartController@addToCart');
+	Route::post('/submit','CartController@submit_cart')->name('submit_cart')->middleware('auth');
 	Route::get('/remove/{id}','CartController@remove');
 	Route::get('/delete/{id}','CartController@delete')->name('delete');
 	Route::get('/waitOrder', 'CartController@waitOrder')->name('waitOrder');
 	Route::get('/confirmed', 'CartController@confirmed')->name('confirmed');
-	Route::get('submit','CartController@submit_cart')->name('submit_cart')->middleware('auth');
 	Route::get('/add_to_cart/{di}','CartController@apiAddToCart'); // API
 });
+
+//Order
+Route::group(['prefix' => 'order'], function(){
+	Route::get('/waiting', 'OrderController@orderWait')->name('waiting'); 
+	Route::get('/confirmed', 'OrderController@orderWait')->name('confirmed'); 
+	
+	
+});
+
 
 //Dang nhap
 
@@ -74,7 +86,7 @@ Route::group(['middleware' => 'auth'], function(){
 			Route::get('/search', 'Admin\RatingController@search')->name('Comment.Search');
 			Route::delete('/deleted', 'Admin\RatingController@destroy');
 		});
-
+   
 		//Category
 		Route::group(['prefix' => 'category'], function(){
 			Route::get('/view', 'Admin\CategoryController@index')->name('viewCategory');
@@ -88,6 +100,8 @@ Route::group(['middleware' => 'auth'], function(){
 		//Cart manager
 		Route::group(['prefix' => 'cartManager'], function(){
 			Route::get('/view', 'Admin\CartManagerController@index')->name('viewCartManager');
+			//Route::get('/updateOrderStatus/', 'Admin\CartManagerController@updateStatus')->name('updateOrderStatus');
+			
 		});
 		
 		//Author

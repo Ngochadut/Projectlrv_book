@@ -31,7 +31,7 @@ class UserRequest extends FormRequest
             'confirm_password' => 'same:password',
         ];
     }
-
+ 
 
     public function messages(){
         return [

@@ -24,14 +24,14 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            
+            'name' => 'required|string'
         ];
     }
 
 
     public function messages(){
         return [
-           
+            'name.unique' => 'Name already exists !!'
         ];
     }
 }

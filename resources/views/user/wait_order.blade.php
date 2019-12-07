@@ -37,22 +37,22 @@
 				<!-- Billing Details -->
 				<div class="billing-details">
                     <p order-col>Cảm ơn quý khách đã đặt hàng tại BookStore,
-BookStore rất vui thông báo đơn hàng của quý khách đã được tiếp nhận và đang trong quá trình xử lý. BookStore sẽ thông báo đến quý khách ngay khi hàng chuẩn bị được giao.</p>
+						BookStore rất vui thông báo đơn hàng của quý khách đã được tiếp nhận và đang trong quá trình xử lý. BookStore sẽ thông báo đến quý khách ngay khi hàng chuẩn bị được giao.</p>
                 </div>
                 <div class="order-col">
-                        <div><strong>PHƯƠNG THỨC THANH TOÁN : </strong></div>
+                        <div><strong>PHƯƠNG THỨC THANH TOÁN </strong> : Tiền mặt</div>
                         <hr>
                 </div>
                 <div class="order-col">
-                        <div><strong>THỜI GIAN GIAO HÀNG DỰ KIẾN : </strong></div>
+                        <div><strong>THỜI GIAN GIAO HÀNG DỰ KIẾN : </strong> 3 ngày kể từ ngày xác nhận đơn hàng</div>
                         <hr>
                 </div>
                 <div class="order-col">
-                        <div><strong>PHÍ VẬN CHUYỂN : </strong></div>
+                        <div><strong>PHÍ VẬN CHUYỂN : </strong> Miễn phí</div>
                         <hr>
                 </div>
                 <div class="order-col">
-                        <div><strong>SỬ DỤNG BỌC SÁCH CAO CẤP BOOKSTORE : </strong></div>
+                        <div><strong>SỬ DỤNG BỌC SÁCH CAO CẤP BOOKSTORE : </strong> Có</div>
                         <hr>
                 </div>
                 <div class="order-col">
@@ -61,33 +61,33 @@ BookStore rất vui thông báo đơn hàng của quý khách đã được ti�
                 
                 
 			</div>
+			
 			<!-- Order Details -->
 			<div class="col-md-5 order-details">
+			
 				<div class="section-title text-center">
 					<h3 class="title">Your Order</h3>
-				</div>
+				</div> 
 				<div class="order-summary">
 					<div class="order-col">
 						<div><strong>PRODUCT</strong></div>
 						<div><strong>TOTAL</strong></div>
 					</div>
+					@foreach($orders->orderdetail as $order)
 					<div class="order-products">
 						<div class="order-col">
-							<div>1x Product Name Goes Here</div>
-							<div>$980.00</div>
-						</div>
-						<div class="order-col">
-							<div>2x Product Name Goes Here</div>
-							<div>$980.00</div>
+							<div>{{$order->quantity}} x {{$order->product->name}}</div>
+							<div>{{$order->product->price}}</div>
 						</div>
 					</div>
+					@endforeach
 					<div class="order-col">
 						<div>Shiping</div>
 						<div><strong>FREE</strong></div>
 					</div>
 					<div class="order-col">
 						<div><strong>TOTAL</strong></div>
-						<div><strong class="order-total">$2940.00</strong></div>
+					<div><strong class="order-total">{{$order->total_price}}</strong></div>
 					</div>
 				</div>
 				<div>

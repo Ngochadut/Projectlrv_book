@@ -30,11 +30,11 @@ class Product extends Model
     } 
 
     public function Order(){
-        return $this->belongsToMany(Order::class, 'detail_order', 'product_id', 'order_id');
+        return $this->belongsToMany(Orders::class, 'detail_order', 'product_id', 'order_id');
     }
 
     public function ratings(){
-        return $this->hasMany(Rating::class)->orderBy('created_at','DESC');
+        return $this->hasMany(Rattings::class)->orderBy('created_at','DESC');
     }
     
     public function images(){
