@@ -39,7 +39,8 @@ Route::get('/logout', 'Auth\LoginController@logout', function () {
 
 //Cart
 Route::group(['prefix' => 'cart'], function(){
-	Route::get('/checkOut', 'CartController@cart')->name('checkOut'); 
+	// Route::get('/checkOut', 'CartController@cart')->name('checkOut'); 
+	// Route::get('/checkOut', 'CartController@cart')->name('emptyCart');
 	Route::get('/addToCart/{id}','CartController@addToCart');
 	Route::post('/submit','CartController@submit_cart')->name('submit_cart')->middleware('auth');
 	Route::get('/remove/{id}','CartController@remove');
@@ -48,11 +49,13 @@ Route::group(['prefix' => 'cart'], function(){
 	Route::get('/confirmed', 'CartController@confirmed')->name('confirmed');
 	Route::get('/add_to_cart/{di}','CartController@apiAddToCart'); // API
 });
-
-//Order
+Route::get('/checkout', 'CartController@cart')->name('checkOut'); 
 Route::group(['prefix' => 'order'], function(){
-	Route::get('/waiting', 'OrderController@orderWait')->name('waiting'); 
-	Route::get('/confirmed', 'OrderController@orderWait')->name('confirmed'); 
+
+	Route::get('/confirmed', 'OrderController@order')->name('confirmed'); 
+	Route::get('/delivery', 'OrderController@order')->name('delivery');
+	Route::get('/emptyCart', 'OrderController@order')->name('emptyCart'); 
+	Route::get('/checkOut', 'OrderController@order')->name('checkOut'); 
 	
 	
 });
@@ -100,7 +103,7 @@ Route::group(['middleware' => 'auth'], function(){
 		//Cart manager
 		Route::group(['prefix' => 'cartManager'], function(){
 			Route::get('/view', 'Admin\CartManagerController@index')->name('viewCartManager');
-			//Route::get('/updateOrderStatus/', 'Admin\CartManagerController@updateStatus')->name('updateOrderStatus');
+			Route::post('/updateOrderStatus/', 'Admin\CartManagerController@updateStatus')->name('updateOrderStatus');
 			
 		});
 		

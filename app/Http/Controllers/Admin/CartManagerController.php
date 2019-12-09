@@ -15,10 +15,14 @@ class CartManagerController extends Controller
         return view('admin.cartManager.index',compact('orders'));
     }
 
-    public function updateStatus($order_id, Request $request) {
-        dd($request->status);
-        
-        dd('Ngoc Ha');
-        return $order_id;
+    public function updateStatus(Request $request) {
+        $order =  Orders::find($request->order_id);
+        $order->status = $request->status;
+        if($order->save()){
+            return 'Updata succeed';
+        }
+        else{
+            return "False";
+        }       
     }
 }  

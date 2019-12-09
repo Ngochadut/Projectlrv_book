@@ -16,8 +16,7 @@ class UserController extends Controller
     }
 
     public function updateUser(Request $request){
-        
-       //dd($request);
+    
 		if($request->password === null){
 			$data = $request->only('name', 'phone', 'firstname', 'lastname', 'address');
 		}

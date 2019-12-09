@@ -38,8 +38,8 @@
 				<div class="billing-details">
                 <div class="">
                     <h4>
-                    Đơn hàng đã sẵn sàng để giao đến quý khách 
-                    Chúng tôi vừa bàn giao đơn hàng của quý khách đến đối tác vận chuyển BookStore Team. Đơn hàng của quý khách sẽ được giao trong ngày hôm nay 25/09/2019
+                    Đơn hàng đã sẵn sàng để giao đến quý khách.
+                    Chúng tôi vừa bàn giao đơn hàng của quý khách đến đối tác vận chuyển BookStore Team. Đơn hàng của quý khách sẽ được giao trong ngày hôm nay.
                     </h4>
 				</div>
 				</div>

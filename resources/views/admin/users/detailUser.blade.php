@@ -91,30 +91,6 @@
 										</label>
 									</div>
 								</div>
-								<div class="form-group checkbox">
-                            <label>
-                                <input type="checkbox" id="changepass" name="changepass" class="pt-3">Change the password
-                            </label>
-                        </div>  
-                        <div id="newpass" style="display: none;">
-                            <div class="form-group row">
-                                <label class="col-md-2 pt-3">Mật khẩu cũ</label>
-                                <input type="password" id="oldpass" name="oldpass" class="form-control col-md-10"
-                                       placeholder="Mật khẩu cũ"
-                                       disabled>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-2 pt-3">Mật khẩu</label>
-                                <input type="password" id="password" name="password"  class="form-control col-md-10"
-                                       placeholder="Mật khẩu"
-                                       disabled>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-2 pt-3">Xác nhận mật khẩu</label>
-                                <input type="password" id="confirm_password" name="confirm_password" value="" class="form-control col-md-10"
-                                       placeholder="Xác nhận mật khẩu" disabled>
-                            </div>
-                        </div>
 								<div class="form-group">
 									<label>Address</label>
 									<textarea class="form-control" name="address" rows="3" placeholder="120 Xô Viết Nghệ Tĩnh, Đà Nẵng">{{$user->address}}</textarea>

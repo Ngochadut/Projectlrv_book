@@ -15,19 +15,19 @@
                     <div class="card-head">
                         <h1>CART MANAGER</h1>
                     </div>
-                    <form action="{{route('updateOrderStatus')}}" method="GET">
+                    <div>
 		            @csrf
                     @if(session('class'))
 						<div class="alert bg-{{session('class')}}" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>{{session('message')}}</div>
 					@endif
                     <div class="card-body ">
                         <div class="table-scrollable">
-                        <form action=" /searchType" method="get">
+                        <!-- <form>
                             <div class="input-group">
                                 <input type="text" class="form-control input-md" name="search" placeholder="Search for..." />
                                 <span class="input-group-btn"><button type="submit" class="btn btn-primary btn-md" >Search</button></span>
                             </div>
-                        </form>
+                        </form> -->
                         <table class="table table-hover table-checkable order-column full-width" id="example4">
                             <thead>
                                 <tr>
@@ -74,7 +74,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <button id="btn_save" data-order-id="{{$order->id}}">Save</button>
+                                        <button class="btn_save" data-order-id="{{$order->id}}">Save</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -82,7 +82,7 @@
                         </table>
                     </div>
                 </div>
-                </form>
+</div>
             </div>
         </div>
     </div>

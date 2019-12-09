@@ -93,12 +93,19 @@
                             <div class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     <i class="fa fa-shopping-cart"></i>
-                                    <div class="qty">3</div>
-                                    <span><a href="{{ route('checkOut') }}"> Cart</span>
+                                    <div class="qty">
+                                       
+                                    
+                                    </div>
+                                    <span>
+                                    <a href="{{ route('checkOut') }}">
+                                    Cart
+                                    </span>
+                                    
                                 
                                 </a>
                             </div>
-                            <!-- /Cart -->
+                            <!-- /Cart --> 
 
                             <!-- Menu Toogle -->
                             <div class="menu-toggle">

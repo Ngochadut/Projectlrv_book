@@ -30,7 +30,7 @@
 <div class="container centerimg ">
 	<img src="/image/3.jpg" alt="" height="300px" width="500px">
 </div>
-@endif
+
 <!-- BREADCRUMB -->
 
 @endsection

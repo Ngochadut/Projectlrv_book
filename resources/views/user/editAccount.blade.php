@@ -14,124 +14,144 @@
             <div class="panel-heading">
                 INFORMATION ACCOUNT
             </div>  
-            @if(session('class'))
-            <div class="alert alert-{{session('class')}} alert-dismissible fade show">
-                <li>{{session('message')}}</li>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        <div class="col-6 container">
+        <div class="panel-body">
+            <div class="row">
+            <form action="{{route('account_update')}}" method="get" enctype="multipart/form-data">
+							@csrf
+            <form action="" method="post" enctype="multipart/form-data" >
+             @csrf
+            <div class="row">
+                <div class="col-sm-3 col-md-2 col-5" style="margin-left: 10px">
+                    <label style="font-weight:bold;">Email</label>
+                </div>
+                <div class="col-md-8 col-6">
+                    <input id="email" name="email" type="text" placeholder="Your name" class="form-control" readonly="readonly" value="{{ Auth::user()->email }}"> 
+                </div>
             </div>
-            @endif
-            <div class="col-9 container">
-            <div class="panel-body">
-                <div class="row">
-                <form action="" method="post" enctype="multipart/form-data" >
-                        @csrf
-                <div class="form-group">
-                <label><i class="required">(*)</i>E-Mail</label>
-                <input id="email" name="email" type="text" placeholder="Your name" class="form-control" readonly="readonly" value="{{ Auth::user()->email }}">
+            <hr>
+            <div class="row">
+                <div class="col-sm-3 col-md-2 col-5" style="margin-left: 10px">
+                    <label style="font-weight:bold;">Name</label>
                 </div>
-                <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label><i class="required">(*)</i> Name</label>
-                        <input id="firstname" name="firstname" type="text" placeholder="Your FirstName" class="form-control" value="{{ Auth::user()->firstname }}">
-                        @if ($errors->has('firstname'))
-                        <span class="invalid-feedback" style="display: block" role="alert">
-                            <strong>{{ $errors->first('firstname') }}</strong>
-                        </span>
-                        @endif
-                    </div>
+                <div class="col-md-8 col-6">
+                <input id="name" name="name" type="text" placeholder="Your Name" class="form-control" value="{{ Auth::user()->name }}">
                 </div>
-                    <div class="col-6">
-						<div class="form-group">
-							<label><i class="required">(*)</i>First Name</label>
-							<input id="firstname" name="firstname" type="text" placeholder="Your FirstName" class="form-control" value="{{ Auth::user()->firstname }}">
-							@if ($errors->has('firstname'))
-							<span class="invalid-feedback" style="display: block" role="alert">
-								<strong>{{ $errors->first('firstname') }}</strong>
-							</span>
-							@endif
-						</div>
-					</div>
-					<div class="col-6">
-						<div class="form-group">
-							<label><i class="required">(*)</i>Last Name</label>
-							<input id="lastname" name="lastname" type="text" placeholder="Your LastName" class="form-control" value="{{ Auth::user()->lastname }}">
-							@if ($errors->has('lastname'))
-							<span class="invalid-feedback" style="display: block" role="alert">
-								<strong>{{ $errors->first('lastname') }}</strong>
-							</span>
-							@endif
-						</div>
-					</div>
-
-                    <div class="form-group">
-                        <label><i class="required">(*)</i>Phone</label>
-                        <input id="phone" name="phone" type="text" placeholder="Your Phone" class="form-control" value="{{ Auth::user()->phone }}">
-                        @if ($errors->has('phone'))
-                        <span class="invalid-feedback" style="display: block" role="alert">
-                            <strong>{{ $errors->first('phone') }}</strong>
-                        </span>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label><i class="required">(*)</i>Address</label>
-                        <input id="address" name="address" type="text" placeholder="Your Address" class="form-control" value="{{ Auth::user()->address }}">
-                        @if ($errors->has('address'))
-                        <span class="invalid-feedback" style="display: block" role="alert">
-                            <strong>{{ $errors->first('address') }}</strong>
-                        </span>
-                        @endif
-                    </div>
-
-                    <div class="form-group">
-                        <label><i class="required">(*)</i>Gender</label>
-                        <label class="checkbox-inline">
-                            <input type="radio" name="gender"value="0" {{ Auth::user()->gender == 0 ? 'checked' : '' }}>Male
-                            <input type="radio" name="gender" value="1" {{ Auth::user()->gender == 1 ? 'checked' : '' }}>Female
-                        </label>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Change password </label>
-                        <input id="newpass" type="checkbox" value="1">
-                        @if ($errors->has('password'))
-                        <span class="invalid-feedback" style="display: block" role="alert">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                        @endif
-                        @if ($errors->has('confirm_password'))
-                        <span class="invalid-feedback" style="display: block" role="alert">
-                            <strong>{{ $errors->first('confirm_password') }}</strong>
-                        </span>
-                        @endif
-                    </div>
-                    <div id="formnewpass" style="display: none;">
-                        <div class="form-group">
-                            <label>New password</label>
-                            <input name="password" id="password" value="" type="password" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Confirm new password</label>
-                            <input name="confirm_password" id="confirm_password" value="" type="password" class="form-control">
-                            <span style="display: block"  id='message'></span>
-                        </div>
-                        <div id="pswd_info">
-                            <h4>Password must meet the following requirements:</h4>
-                            <ul>
-                                <li id="letter" class="invalid">At least <strong>one letter</strong></li>
-                                <li id="capital" class="invalid">At least <strong>one capital letter</strong></li>
-                                <li id="number" class="invalid">At least <strong>one number</strong></li>
-                                <li id="special" class="invalid">At least  <strong>one special letter</strong></li>
-                                <li id="length" class="invalid">Be at least <strong>8 characters</strong></li>
-                            </ul>
-                        </div>
-                    </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-3 col-md-2 col-5" style="margin-left: 10px">
+                    <label style="font-weight:bold;">First Name</label>
                 </div>
-                    </form></div></div></div></div></div></div></div>
+                <div class="col-md-8 col-6">
+                <input id="firstname" name="firstname" type="text" placeholder="Your FirstName" class="form-control" value="{{ Auth::user()->firstname }}">
+                    @if ($errors->has('firstname'))
+                    <span class="invalid-feedback" style="display: block" role="alert">
+                        <strong>{{ $errors->first('firstname') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-3 col-md-2 col-5" style="margin-left: 10px">
+                    <label style="font-weight:bold;">Last Name</label>
+                </div>
+                <div class="col-md-8 col-6">
+                <input id="lastname" name="lastname" type="text" placeholder="Your LastName" class="form-control" value="{{ Auth::user()->lastname }}">
+                    @if ($errors->has('lastname'))
+                    <span class="invalid-feedback" style="display: block" role="alert">
+                        <strong>{{ $errors->first('lastname') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-3 col-md-2 col-5" style="margin-left: 10px">
+                    <label style="font-weight:bold;">Phone</label>
+                </div>
+                <div class="col-md-8 col-6">
+                <input id="phone" name="phone" type="text" placeholder="Your Phone" class="form-control" value="{{ Auth::user()->phone }}">
+                @if ($errors->has('phone'))
+                <span class="invalid-feedback" style="display: block" role="alert">
+                    <strong>{{ $errors->first('phone') }}</strong>
+                </span>
+                @endif
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-3 col-md-2 col-5" style="margin-left: 10px">
+                    <label style="font-weight:bold;">Address</label>
+                </div>
+                <div class="col-md-8 col-6">
+                <input id="address" name="address" type="text" placeholder="Your Address" class="form-control" value="{{ Auth::user()->address }}">
+                    @if ($errors->has('address'))
+                    <span class="invalid-feedback" style="display: block" role="alert">
+                        <strong>{{ $errors->first('address') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
+            <hr>
+            <div class="form-group checkbox">
+            <label>
+                <input type="checkbox" id="changepass" name="changepass" class="pt-3">Change the password
+            </label>
+            </div>  
+            <div class= "col-3 container "id="newpass" style="display: none;">
+                <div class="form-group row">
+                    <label class="col-md-2 pt-3">Mật khẩu cũ</label>
+                    <input type="password" id="oldpass" name="oldpass" class="form-control"
+                            placeholder="Mật khẩu cũ"
+                            disabled>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 pt-3">Mật khẩu</label>
+                <input type="password" id="password" name="password"  class="form-control"
+                        placeholder="Mật khẩu"
+                        disabled>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 pt-3">Xác nhận mật khẩu</label>
+                <input type="password" id="confirm_password" name="confirm_password" value="" class="form-control"
+                        placeholder="Xác nhận mật khẩu" disabled>
+            </div>
+            </form>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+        </div>          
+    </div>
+    </div>
+</div>
+</div></div></div></div></div>
 @endsection
 
 @section('cutom-js')
-
+<script>
+        $(document).ready(function () {
+            $('#changepass').click(function () { 
+                if ($(this).is(':checked')) {
+                    $('#newpass input').removeAttr('disabled');
+                    $('#newpass').show('slow');
+                } else {
+                    $('#newpass').hide('slow');
+                    $('#newpass input').attr('disabled', '');
+                }
+            });
+            $('.edit_account').on('click',function(e){
+                let phone = $('#phone').val();
+                let link_fb = $('#link_fb').val();
+                let password = $('#password').val();
+                let confirm_password = $('#confirm_password').val();
+                if (password !== confirm_password){
+                    alertify.error("Wrong !!");
+                    e.preventDefault();
+                }
+                var thisRegexphone = new RegExp('([0-9]+)');
+            });
+        });
+    </script>
 @endsection

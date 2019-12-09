@@ -12,7 +12,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 class CartController extends Controller
 {
-    
+    public function __construct(){
+
+        $this->middleware('auth');
+     
+
+        // $this->middleware('log')->only('index');
+
+        // $this->middleware('subscribed')->except('store');
+    }
     public function waitOrder(){
         return view('user.wait_Order');
     }
@@ -109,7 +117,7 @@ class CartController extends Controller
         }
         else{
             $user = Auth::user();
-            $products = [];
+            $products = []; 
             $total = 0;
             foreach( $cart_array as $key => $value ){
                 $id = $value[0];

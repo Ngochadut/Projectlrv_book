@@ -42,15 +42,6 @@ class UserController extends Controller
         $data = $request->except('_token', 'email');
         if($user = Users::find($request->id)){
             $data['password'] = isset($data['password']) ? bcrypt($data['password']) : $user->password;
-            if($request->hasFile('img')) {
-                $file = request()->file('img');
-                $filename = '/images/avatars/'.md5(time()).'.jpg';
-                $file->move(public_path('/images/avatars/'), $filename);
-                $data['image'] = $filename;
-                if(File::exists(public_path().$user->image)) {
-                    File::delete(public_path().$user->image);
-                }
-            }
             if ($user->update($data)) {
                 return redirect()->back()->with(['class' => 'success', 'message' => 'Update successfully !!']);
             }else{
