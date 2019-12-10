@@ -29,68 +29,27 @@
                             </label>
                         </div>
                         @endforeach
-
-                       
 						</div>
 					</div>
-                    <!-- /aside Widget -->
-
-                    <!-- aside Widget -->
-                    <div class="aside">
-                        <h3 class="aside-title">Price</h3>
-                        <div class="price-filter">
-                            <div id="price-slider"></div>
-                            <div class="input-number price-min">
-                                <input id="price-min" type="number">
-                                <span class="qty-up">+</span>
-                                <span class="qty-down">-</span>
-                            </div>
-                            <span>-</span>
-                            <div class="input-number price-max">
-                                <input id="price-max" type="number">
-                                <span class="qty-up">+</span>
-                                <span class="qty-down">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /aside Widget -->
-
-                
-                    <!-- aside Widget -->
                     <div class="aside">
                         <h3 class="aside-title">Top selling</h3>
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="http://placehold.it/200x240" alt="">
+                        @foreach($products_sell as $product)
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                @if(count($product->images) > 0)
+                                <td class="center"><img src="{{$product->images->first()->name}}" alt="" height="50px" width="1px"></td>
+                                @else
+                                <td class="center"><img src="/images/product/default.png" alt="" height="150px" width="100px"></td>
+                                @endif
+                                </div>
+                                <div class="product-body">
+                                    <p class="product-category">{{$product->Category['name']}}</p>
+                                    <h3 class="product-name"><a href="#">{{$product->name}}</a></h3>
+                                    <h4 class="product-price">{{$product->price}} <del class="product-old-price">{{$product->maket_price}}</del></h4>
+                                </div>
                             </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="http://placehold.it/200x240" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
- 
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="http://placehold.it/200x240" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <!-- /aside Widget -->
                 </div>
@@ -132,9 +91,9 @@
                             <div class="product">
                                 <div class="product-img">
                                 @if(count($product->images) > 0)
-                                    <img src="{{$product->images->first()->name}}" alt="">
+                                    <img src="{{$product->images->first()->name}}" alt="" height="300px" width="auto">
                                 @else
-                                    <td class="center"><img src="/images/product/default.png" alt="" height="150px" width="100px"></td>
+                                    <td class="center"><img src="/images/product/default.png" alt="" height="120px" width="auto"></td>
                                 @endif
                                     <div class="product-label">
                                         <span class="sale">-30%</span>

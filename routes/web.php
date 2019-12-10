@@ -15,17 +15,19 @@
 Auth::routes();
 Auth::routes(['verify' => true]);
 Route::get('/', 'HomeController@index')->name('welcome');
+Route::get('/sale', 'HomeController@sale')->name('sale');
+
 Route::get('/welcome',function(){
 	return redirect()->route('welcome');
 });
 
 Route::get('/productDetail/{id}','ProductController@detailProduct')->name('productDetail')->where('id', '[0-9]+');
 Route::get('/productStore','ProductController@productStore')->name('productStore');
-
 Route::get('/user/account','UserController@account')->name('account');
 Route::get('/user/edit','UserController@edit')->name('account_edit');
 Route::post('/user/edit','UserController@updateUser')->name('account_update');
 
+//Search
 Route::get('/search', 'Admin\UserController@search');
 Route::get('/api/search', 'Admin\UserController@apiSearch')->name('seachapi');
 Route::get('/searchType', 'Admin\TypeController@search');
@@ -34,7 +36,7 @@ Route::get('/searchProduct', 'Admin\ProductController@search');
 Route::get('/searchAuthor', 'Admin\AuthorController@search');
 
 Route::get('/logout', 'Auth\LoginController@logout', function () {
-	return abort(404);
+	return abort(404); 
 });
 
 //Cart

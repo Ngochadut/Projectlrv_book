@@ -34,8 +34,10 @@ class HomeController extends Controller
         $products = Product::with(['images:product_id,name'])->orderByDesc('updated_at')->take(8)->get();
         $products_sell = Product::with(['images:product_id,name'])->orderByDesc('updated_at')->take(3)->get();
         return view('welcome', compact('products','products_newest','products_sell'));
+    } 
+    public function sale(){
+        return view('sale');
     }
-    
     
     
        

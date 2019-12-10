@@ -133,7 +133,7 @@
                     <!-- NAV -->
                     <ul class="main-nav nav navbar-nav">
                         <li class="{{Request::is('welcome') ? 'active' : ''}}"><a href="{{ route('welcome') }}">Trang chủ</a></li>
-                        <li><a href="#">Flash Sale</a></li>
+                        <li><a href="{{ route('sale') }}">Flash Sale</a></li>
                         <li><a href="#">B-POINT</a></li>
                         <li><a href="#">B-Blog</a></li>
                         <li><a href="{{ route('productStore') }}">B-POINT Store</a></li>

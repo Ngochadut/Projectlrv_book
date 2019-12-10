@@ -22,6 +22,6 @@ class CheckAdmin
         if(Auth::user() && $role_admin_id == $user_role){ //check xem co phai admin khong
             return $next($request);
         }
-        return redirect()->route('welcome'); //dieu huong
+        return redirect()->route('welcome'); //dieu huong 
     }
 }

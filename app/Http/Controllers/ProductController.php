@@ -22,8 +22,9 @@ class ProductController extends Controller
     }
 
     public function productStore(){
+        $products_sell = Product::with(['images:product_id,name'])->orderByDesc('updated_at')->take(3)->get();
         $categorys = Categories::all()->take(5);
-        $products = Product::with(['images:product_id,name'])->take(9)->get();
-        return view('productStore',compact('categorys','products'));
+        $products = Product::with(['images:product_id,name'])->orderByDesc('updated_at')->take(6)->get();
+        return view('productStore',compact('categorys','products','products_sell'));
     }
 } 
