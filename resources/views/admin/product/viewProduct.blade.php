@@ -45,7 +45,6 @@
                             @foreach($product_images as $product)
                                 <tr class="odd gradeX">
                                     <td class="center">{{$product->id}}</td>
-                                     
                                     @if(count($product->getRelations()['images'])>0)
                                     @foreach($product->getRelations()['images'] as $image)
                                     <td class="center"><img src="{{$image->name}}" alt="" height="150px" width="100px"></td>

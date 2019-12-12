@@ -26,7 +26,7 @@
                         @endif
                         </div>
                         <div class="shop-body">
-                            <a href="" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="{{ route('productDetail',$product->id) }}" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
                         </div> 
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                                         <div class="product-body">
                                             <p class="product-category">{{$product->Category['name']}}</p>
                                             <h3 class="product-name"><a href="#">{{$product->name}}</a></h3>
-                                            <h4 class="product-price">{{$product->price}} <del class="product-old-price">{{$product->maket_price}}</del></h4>
+                                            <h4 class="product-price">{{number_format($product->price, 0, '', ',')}} VNĐ <del class="product-old-price">{{$product->maket_price}}</del></h4>
                                             <div class="product-rating">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
@@ -91,13 +91,17 @@
                                             </div>
                                         </div> 
                                         <div class="add-to-cart">
-                                            <button class="add-to-cart-btn btn_add_to_cart"  data-product-id="{{$product->id}}"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+                                            <button class="add-to-cart-btn btn_add_to_cart"  data-product-id="{{$product->id}}">
+                                            @if(!Auth::check())
+					                            <a class="fa fa-shopping-cart" href="/login">Add to cart !</a>
+                                            @else
+                                            <i class="fa fa-shopping-cart"></i> Add to cart
+                                            @endif
+                                            </button>
                                         </div>
                                     </div>
                                     @endforeach
                                     <!-- /product -->
-
-
                                 </div>
                                 <div id="slick-nav-1" class="products-slick-nav"></div>
                             </div>
@@ -113,72 +117,15 @@
     </div>
     <!-- /SECTION -->
     <!-- HOT DEAL SECTION -->
-    <div id="hot-deal" class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="hot-deal">
-                        <ul class="hot-deal-countdown">
-                            <li>
-                                <div>
-                                    <h3>02</h3>
-                                    <span>Days</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <h3>10</h3>
-                                    <span>Hours</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <h3>34</h3>
-                                    <span>Mins</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <h3>60</h3>
-                                    <span>Secs</span>
-                                </div>
-                            </li>
-                        </ul>
-                        <h2 class="text-uppercase">hot deal this week</h2>
-                        <p>New Collection Up to 50% OFF</p>
-                        <a class="primary-btn cta-btn" href="#">Shop now</a>
-                    </div>
-                </div>
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
+    <div class="container" style="text-align: center">
+        <img src="/image/TrangTongT12-3_main.jpg" alt="" height="300px" width="1100px">
     </div>
-    <!-- /HOT DEAL SECTION -->
     <!-- SECTION -->
     <div class="section">
         <!-- container -->
         <div class="container">
             <!-- row -->
             <div class="row">
-
-                <!-- section title -->
-                <div class="col-md-12">
-                    <div class="section-title">
-                        <h3 class="title">Top selling</h3>
-                        <div class="section-nav">
-                            <ul class="section-tab-nav tab-nav">
-                                <li class="active"><a data-toggle="tab" href="#tab2">Kinh Tế</a></li>
-                                <li><a data-toggle="tab" href="#tab2">English</a></li>
-                                <li><a data-toggle="tab" href="#tab2">Kỹ Năng</a></li>
-                                <li><a data-toggle="tab" href="#tab2">Công Nghệ</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- /section title -->
                 <!-- Products tab & slick -->
                 <div class="col-md-12">
                     <div class="row">
@@ -187,7 +134,7 @@
                             <div id="tab2" class="tab-pane fade in active">
                                 <div class="products-slick" data-nav="#slick-nav-2">
                                     <!-- product -->
-                                    @foreach($products as $product)
+                                    @foreach($products_kt as $product)
                                     <div class="product">
                                         <div class="product-img">
                                         @if(count($product->images) > 0)
@@ -203,7 +150,7 @@
                                         <div class="product-body">
                                             <p class="product-category">{{$product->Category['name']}}</p>
                                             <h3 class="product-name"><a href="#">{{$product->name}}</a></h3>
-                                            <h4 class="product-price">{{$product->price}} <del class="product-old-price">{{$product->maket_price}}</del></h4>
+                                            <h4 class="product-price">{{number_format($product->price, 0, '', ',')}} VNĐ <del class="product-old-price">{{number_format($product->maket_price, 0, '', ',')}} VNĐ</del></h4>
                                             <div class="product-rating">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
@@ -245,7 +192,7 @@
             <div class="row">
                 <div class="col-md-4 col-xs-6">
                     <div class="section-title">
-                        <h4 class="title">Top selling</h4>
+                        <h4 class="title">Sách Kĩ Năng</h4>
                         <div class="section-nav">
                             <div id="slick-nav-3" class="products-slick-nav"></div>
                         </div>
@@ -253,7 +200,7 @@
                     <div class="products-widget-slick" data-nav="#slick-nav-3">
                         <div>
                         <!-- product widget -->
-                        @foreach($products_sell as $product)
+                        @foreach($products_kn as $product)
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
@@ -266,7 +213,7 @@
                                 <div class="product-body">
                                     <p class="product-category">{{$product->Category['name']}}</p>
                                     <h3 class="product-name"><a href="#">{{$product->name}}</a></h3>
-                                    <h4 class="product-price">{{$product->price}} <del class="product-old-price">{{$product->maket_price}}</del></h4>
+                                    <h4 class="product-price">{{number_format($product->price, 0, '', ',')}} VNĐ <del class="product-old-price">{{number_format($product->maket_price, 0, '', ',')}} VNĐ</del></h4>
                                 </div>
                             </div>
                         @endforeach
@@ -276,7 +223,7 @@
                 </div>
                 <div class="col-md-4 col-xs-6">
                     <div class="section-title">
-                        <h4 class="title">Top selling</h4>
+                        <h4 class="title">Sách Văn Học</h4>
                         <div class="section-nav">
                             <div id="slick-nav-3" class="products-slick-nav"></div>
                         </div>
@@ -284,7 +231,7 @@
                     <div class="products-widget-slick" data-nav="#slick-nav-3">
                         <div>
                         <!-- product widget -->
-                        @foreach($products_sell as $product)
+                        @foreach($products_vh as $product)
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
@@ -297,7 +244,7 @@
                                 <div class="product-body">
                                     <p class="product-category">{{$product->Category['name']}}</p>
                                     <h3 class="product-name"><a href="#">{{$product->name}}</a></h3>
-                                    <h4 class="product-price">{{$product->price}} <del class="product-old-price">{{$product->maket_price}}</del></h4>
+                                    <h4 class="product-price">{{number_format($product->price, 0, '', ',')}} VNĐ <del class="product-old-price">{{number_format($product->maket_price, 0, '', ',')}} VNĐ</del></h4>
                                 </div>
                             </div>
                         @endforeach
@@ -307,12 +254,12 @@
                 </div>
                 <div class="col-md-4 col-xs-6">
                     <div class="section-title">
-                        <h4 class="title">Top selling</h4>
+                        <h4 class="title">Sách Kinh Tế</h4>
                     </div>
                     <div class="products-widget-slick" data-nav="#slick-nav-3">
                         <div>
                         <!-- product widget -->
-                        @foreach($products_sell as $product)
+                        @foreach($products_kt as $product)
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
@@ -325,7 +272,7 @@
                                 <div class="product-body">
                                     <p class="product-category">{{$product->Category['name']}}</p>
                                     <h3 class="product-name"><a href="#">{{$product->name}}</a></h3>
-                                    <h4 class="product-price">{{$product->price}} <del class="product-old-price">{{$product->maket_price}}</del></h4>
+                                    <h4 class="product-price">{{number_format($product->price, 0, '', ',')}} VNĐ <del class="product-old-price">{{number_format($product->maket_price, 0, '', ',')}} VNĐ</del></h4>
                                 </div>
                             </div>
                         @endforeach
@@ -350,7 +297,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/home.js') }}"></script>
-@endsection
+@endsection 
 
 
     

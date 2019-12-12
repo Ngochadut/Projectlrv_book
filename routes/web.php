@@ -11,18 +11,24 @@
 |
 */
 
-
+ 
 Auth::routes();
 Auth::routes(['verify' => true]);
-Route::get('/', 'HomeController@index')->name('welcome');
-Route::get('/sale', 'HomeController@sale')->name('sale');
+Route::get('','HomeController@index')->name('welcome');
+
+
+
+
 
 Route::get('/welcome',function(){
 	return redirect()->route('welcome');
 });
 
+
+Route::get('/store','StoreController@index')->name('store');
+Route::get('/sale','ProductController@sale')->name('sale');
 Route::get('/productDetail/{id}','ProductController@detailProduct')->name('productDetail')->where('id', '[0-9]+');
-Route::get('/productStore','ProductController@productStore')->name('productStore');
+
 Route::get('/user/account','UserController@account')->name('account');
 Route::get('/user/edit','UserController@edit')->name('account_edit');
 Route::post('/user/edit','UserController@updateUser')->name('account_update');
@@ -39,26 +45,29 @@ Route::get('/logout', 'Auth\LoginController@logout', function () {
 	return abort(404); 
 });
 
+
 //Cart
 Route::group(['prefix' => 'cart'], function(){
-	// Route::get('/checkOut', 'CartController@cart')->name('checkOut'); 
+	Route::get('/checkOut', 'CartController@cart')->name('checkOut'); 
 	// Route::get('/checkOut', 'CartController@cart')->name('emptyCart');
 	Route::get('/addToCart/{id}','CartController@addToCart');
 	Route::post('/submit','CartController@submit_cart')->name('submit_cart')->middleware('auth');
 	Route::get('/remove/{id}','CartController@remove');
 	Route::get('/delete/{id}','CartController@delete')->name('delete');
 	Route::get('/waitOrder', 'CartController@waitOrder')->name('waitOrder');
-	Route::get('/confirmed', 'CartController@confirmed')->name('confirmed');
-	Route::get('/add_to_cart/{di}','CartController@apiAddToCart'); // API
-});
-Route::get('/checkout', 'CartController@cart')->name('checkOut'); 
-Route::group(['prefix' => 'order'], function(){
-
-	Route::get('/confirmed', 'OrderController@order')->name('confirmed'); 
-	Route::get('/delivery', 'OrderController@order')->name('delivery');
-	Route::get('/emptyCart', 'OrderController@order')->name('emptyCart'); 
-	Route::get('/checkOut', 'OrderController@order')->name('checkOut'); 
+	Route::get('/confirmed', 'CartController@confirmed')->name('confirmed'); 
+	Route::get('/add_to_cart/{id}','CartController@apiAddToCart');
+	Route::get('/history','CartController@history')->name('history'); 
 	
+});
+//ORDER
+	Route::group(['prefix' => 'order'], function(){
+		Route::get('/checkout', 'OrderController@order')->name('cartOrder'); 
+		Route::get('/confirmed', 'OrderController@order')->name('confirmed'); 
+		Route::get('/delivery', 'OrderController@order')->name('delivery');
+		Route::get('/emptyCart', 'OrderController@order')->name('emptyCart'); 
+		Route::get('/checkOut', 'OrderController@order')->name('cart'); 
+		Route::post('/cancel}','OrderController@cancel')->name('cancel');
 	
 });
 

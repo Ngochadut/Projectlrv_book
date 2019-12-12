@@ -61,15 +61,15 @@
                                             @else
                                             <option value="DELIVERY">Delivery</option>
                                             @endif
-                                            @if($order->status === 'Finish')
-                                            <option value="Finish" selected>Finish</option>
+                                            @if($order->status === 'DONE')
+                                            <option value="DONE" selected>Done</option>
                                             @else
-                                            <option value="Finish">Finish</option>
+                                            <option value="DONE">Done</option>
                                             @endif
-                                            @if($order->status === 'Cancel')
-                                            <option value="Cancel" selected>Cancel</option>
+                                            @if($order->status === 'CANCEL')
+                                            <option value="CANCEL" selected>Cancel</option>
                                             @else
-                                            <option value="Cancel">Cancel</option>
+                                            <option value="CANCEL">Cancel</option>
                                             @endif
                                         </select>
                                     </td>

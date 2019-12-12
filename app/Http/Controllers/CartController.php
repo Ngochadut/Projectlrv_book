@@ -13,21 +13,9 @@ use Illuminate\Support\Facades\DB;
 class CartController extends Controller
 {
     public function __construct(){
-
         $this->middleware('auth');
-     
+    }
 
-        // $this->middleware('log')->only('index');
-
-        // $this->middleware('subscribed')->except('store');
-    }
-    public function waitOrder(){
-        return view('user.wait_Order');
-    }
-    
-    public function confirmed(){
-        return view('user.confirmed_order');         
-    }
     public function apiAddToCart($id, Request $request) {
         try {
             $num = $request->quantity;
@@ -36,14 +24,14 @@ class CartController extends Controller
             if($cart_array == null){
                 $cart_array = [];
                 array_push($cart_array, [$id, $num]);
-                $cart_JSON = serialize($cart_array);
+                $cart_JSON = serialize($cart_array); 
                 Auth::user()->temporatyOrder = $cart_JSON;
                 if(Auth::user()->save()) {
                     return 1;
                 }
-                
                 return "Add to Cart failured";
             }
+
             else {
                 foreach( $cart_array as $key => $value ) {
                     if($value[0] == $id) {
@@ -63,7 +51,6 @@ class CartController extends Controller
                         return "Add to Cart failured";
                     }
                 }
-                
                 array_push($cart_array, [$id, $num]);
                 $cart_JSON = serialize($cart_array);
                 Auth::user()->temporatyOrder = $cart_JSON;
@@ -73,11 +60,12 @@ class CartController extends Controller
                 return "Add to Cart failured";
             }
         }
-        catch(Exception $ex) {
+        catch(Exception $ex) { 
             return $ex;
         }
         return ;
     }
+ 
     public function remove($id){
         $cart = Auth::user()->temporatyOrder;
         $cart_array = unserialize($cart);
@@ -88,12 +76,13 @@ class CartController extends Controller
             $cart_JSON = serialize($cart_array);
             Auth::user()->temporatyOrder = $cart_JSON;
             if(Auth::user()->save()) {
-                return "Delete to Succecss";
+                return redirect()->back()->with(['class' => 'success', 'message' => 'Delete success.']);;
             }
-            return "Add to Cart failured";
+            return "delete wrong";
         }
         return;
     }
+
     public function delete($id){
         $cart = Auth::user()->temporatyOrder;
         $cart_array = unserialize($cart);
@@ -103,12 +92,13 @@ class CartController extends Controller
                 $cart_JSON = serialize($cart_array);
                 Auth::user()->temporatyOrder = $cart_JSON;
                 if(Auth::user()->save()) {
-                    return ;
+                    return "Đã xóa thành công !!";
                 }
             }
         }
-        return "Delete Product failured";
+        return "Xóa thất bại";
     }
+
     public function cart(){
         $cart = Auth::user()->temporatyOrder;
         $cart_array = unserialize($cart);
@@ -158,6 +148,17 @@ class CartController extends Controller
                 $order_detail->save();
             }
         }
-        return redirect('order/waiting');
+        Auth::user()->temporatyOrder = null;
+        Auth::user()->save();
+       
+
+
+        return redirect('order/checkOut');
     }
-}
+    public function history(){
+        $user_id = Auth::user()->id;
+        $historyOder = Orders::where(['user_id'=>$user_id])->with('orderdetail')->get();
+		return view('user.history_order',compact('historyOder'));
+	}
+
+} 

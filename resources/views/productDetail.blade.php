@@ -62,7 +62,7 @@
                         <a class="review-link" href="#">10 Review(s) | Add your review</a>
                     </div>
                     <div>
-                        <h3 class="product-price">{{$products_view->price}}<del class="product-old-price">{{$products_view->maket_price}}</del></h3>
+                        <h3 class="product-price">{{number_format($products_view->price, 0, '', ',')}} VNĐ<del class="product-old-price">{{number_format($products_view->price, 0, '', ',')}} VNĐ</del></h3>
                     </div>
                     <p>{{$products_view->describes}}</p>
 
@@ -74,7 +74,15 @@
                     </div>
 
                     <div class="add-to-cart">
-                        <button class="add-to-cart-btn btn_add_to_cart"  data-product-id="{{$products_view->id}}"><i class="fa fa-shopping-cart"></i>BUY NOW</button>
+                        <button class="add-to-cart-btn btn_add_to_cart"  data-product-id="{{$products_view->id}}">
+                        <div class="add-to-cart"> 
+                            @if(!Auth::check())
+                                <a class="fa fa-shopping-cart" href="/login">BUY NOW</a>
+                            @else
+                            <i class="fa fa-shopping-cart"></i>BUY NOW
+                            @endif
+                        </div>
+                        </button>
                     </div>
 
                     <ul class="product-btns">
@@ -140,10 +148,10 @@
                                         <th  class="col-md-3">Categories :<td class="data">{{$products_view->Category['name']}}</td></th>
                                         </tr>
                                         <tr>
-                                        <th  class="col-md-3">Price :<td class="data">{{$products_view->price}}</td></th>
+                                        <th  class="col-md-3">Price :<td class="data">{{number_format($products_view->price, 0, '', ',')}} VNĐ</td></th>
                                         </tr>
                                         <tr>
-                                        <th  class="col-md-3">Maket Price :<td class="data">{{$products_view->maket_price}}</td></th>
+                                        <th  class="col-md-3">Maket Price :<td class="data">{{number_format($products_view->maket_price, 0, '', ',')}} VNĐ</td></th>
                                         </tr>
                                         <tr>
                                         <th  class="col-md-3">Cover type :<td class="data">{{$products_view->cover_type}}</td></th>
@@ -361,7 +369,7 @@
 
             <div class="col-md-12">
                 <div class="section-title text-center">
-                    <h3 class="title">Category</h3>
+                    <h3 class="title">Sách Gợi Ý</h3>
                 </div>
             </div>
             <!-- product -->
@@ -381,7 +389,7 @@
                     <div class="product-body">
                         <p class="product-category">{{$product->Category['name']}}</p>
                         <h3 class="product-name">{{$product->name}}<a href="#"></a></h3>
-                        <h4 class="product-price">{{$product->price}} <del class="product-old-price">$990.00</del></h4>
+                        <h4 class="product-price">{{number_format($product->price, 0, '', ',')}} VNĐ <del class="product-old-price">{{number_format($product->maket_price, 0, '', ',')}} VNĐ</del></h4>
                         <div class="product-rating">
                         </div>
                         <div class="product-btns">

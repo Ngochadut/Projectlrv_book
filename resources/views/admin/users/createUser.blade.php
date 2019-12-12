@@ -14,7 +14,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					DETAIL MEMBER
+					CREATE MEMBER
 				</div>
 				@if(session('class'))
 				<div class="alert alert-{{session('class')}} alert-dismissible fade show">
@@ -29,19 +29,19 @@
 					<div class="row">
 						<form action="{{route('createUser')}}" method="post" enctype="multipart/form-data">
 							@csrf
-							<input type="hidden" name="id" value="{{$user->id}}">
+							<input type="hidden" name="id" value="">
 							<div class="col-lg-9">
 								@if(session('class'))
 								<div class="alert " role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>{{session('message')}}</div>
 								@endif
 								@if($errors->any())
-								<div class="alert bg-danger" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>{{$errors->first()}}</div>
+								<div class="alert bg-danger" role ="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>{{$errors->first()}}</div>
 								@endif
 								<div class="row">
 									<div class="col-lg-6">
 										<div class="form-group">
 											<label>First Name <font color="red">*</font></label>
-											<input class="form-control" type="text" name="firstname" value="{{$user->firstname}}" placeholder="Enter the first name">
+											<input class="form-control" type="text" name="firstname" value="" placeholder="Enter the first name">
 											@if ($errors->has('firstname'))
 											<span class="text-danger">{{ $errors->first('firstname') }}</span>
 											@endif
@@ -50,7 +50,7 @@
 									<div class="col-lg-6">
 										<div class="form-group {{ $errors->has('lastname') ? 'has-error' : '' }}">
 											<label>Last Name <font color="red">*</font></label>
-											<input class="form-control" type="text" name="lastname" value="{{$user->lastname}}" placeholder="Enter the last name)">
+											<input class="form-control" type="text" name="lastname" value="" placeholder="Enter the last name)">
 											@if ($errors->has('lastname'))
 											<span class="text-danger">{{ $errors->first('lastname') }}</span>
 											@endif
@@ -59,7 +59,7 @@
 									<div class="col-lg-6">
 										<div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
 											<label>User Name <font color="red">*</font></label>
-											<input class="form-control" type="text" name="name" value="{{$user->name}}" placeholder="Enter the name)">
+											<input class="form-control" type="text" name="name" value="" placeholder="Enter the name)">
 											@if ($errors->has('name'))
 											<span class="text-danger">{{ $errors->first('name') }}</span>
 											@endif
@@ -68,14 +68,14 @@
 								</div>
 								<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
 									<label>Email <font color="red">*</font></label>
-									<input class="form-control" type="email" name="email" value="{{$user->email}}" placeholder="Email address (Ex: longdeptrai@gmail.com)">
+									<input class="form-control" type="email" name="email" value="" placeholder="Email address (Ex: longdeptrai@gmail.com)">
 									@if ($errors->has('email'))
 									<span class="text-danger">{{ $errors->first('email') }}</span>
 									@endif
 								</div>
 								<div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
 									<label>Number Phone<font color="red">*</font></label>
-									<input class="form-control" type="text" name="phone" value="{{$user->phone}}" placeholder="Number phone (V/d: 0969999999)">
+									<input class="form-control" type="text" name="phone" value="" placeholder="Number phone (V/d: 0969999999)">
 									@if ($errors->has('phone'))
 									<span class="text-danger">{{ $errors->first('phone') }}</span>
 									@endif
@@ -84,10 +84,10 @@
 									<label>Chức vụ <font color="red">*</font></label>
 									<div class="radio">
 										<label>
-											<input type="radio" name="roles" value="0" {{ old('roles') != 1 ? 'checked' : '' }}>User
+											<input type="radio" name="roles" value="0">User
 										</label>
 										<label>
-											<input type="radio" name="roles" value="1" {{ old('roles') == 1 ? 'checked' : '' }}>Admin
+											<input type="radio" name="roles" value="1">Admin
 										</label>
 									</div>
 								</div>
@@ -117,7 +117,7 @@
                         </div>
 								<div class="form-group">
 									<label>Address</label>
-									<textarea class="form-control" name="address" rows="3" placeholder="120 Xô Viết Nghệ Tĩnh, Đà Nẵng">{{$user->address}}</textarea>
+									<textarea class="form-control" name="address" rows="3" placeholder="120 Xô Viết Nghệ Tĩnh, Đà Nẵng"></textarea>
 								</div>
 								<button type="submit" class="btn btn-primary">Update</button>
 							</div>

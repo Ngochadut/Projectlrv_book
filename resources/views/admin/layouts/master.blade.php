@@ -78,9 +78,9 @@
                         <li><a href="{{ route('viewAuthor') }}">AUTHOR</a></li>
                         <li><a href="{{ route('viewProduct') }}">PRODUCT</a></li>
                         <li><a href="{{ route('viewCartManager') }}">CART MANAGER</a></li>
+                        <li><a href="{{ route('welcome') }}">B-USER</a></li>
                         <li><a href="#}">SOCIETY</a></li>
                         @if(Auth::check())
-                            <li><a href="#">B-ACOUNT</a></li>
                             <li><a href="{{ route('logout') }}">Logout</a></li>
                         @else
                             <li class="{{Request::is('login') ? 'active' : ''}}"><a href="{{ route('login') }}">Login</a></li>

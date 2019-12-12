@@ -105,7 +105,7 @@ class ProductController extends Controller
 
     public function search(Request $request){
         $search = $request->get('search');
-        $product = Product::where('name', 'like', '%'. $search. '%')->paginate(3);
+        $product = Product::with(['images:product_id,name'])->where('name', 'like', '%'. $search. '%')->paginate(3);
         return view('admin.product.viewProduct', ['products'=> $product]); 
        
     }

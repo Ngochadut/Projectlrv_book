@@ -22,11 +22,15 @@
 				</ul>
 			</div>
 		</div>
+		<hr>
+		<a class="newsletter-btn" href="{{route('history')}}">Lịch sử đơn hàng</a>
 		<!-- /row -->
 	</div>
 	<!-- /container -->
+	
 </div>
 <!-- /BREADCRUMB -->
+
 <div class="container centerimg ">
 	<img src="/image/3.jpg" alt="" height="300px" width="500px">
 </div>

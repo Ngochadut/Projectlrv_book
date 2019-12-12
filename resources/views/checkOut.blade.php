@@ -3,7 +3,7 @@
 @section('page-title','Check Out')
 
 @section('custom-css')
-<link type="text/css" href="{{ asset('css/image.css') }}" rel="stylesheet">
+
 @endsection
 
 @section('content')

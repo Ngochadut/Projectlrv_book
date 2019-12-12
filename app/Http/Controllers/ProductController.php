@@ -21,10 +21,19 @@ class ProductController extends Controller
         return view('productDetail',compact('products_view','product_category'));
     }
 
-    public function productStore(){
-        $products_sell = Product::with(['images:product_id,name'])->orderByDesc('updated_at')->take(3)->get();
-        $categorys = Categories::all()->take(5);
-        $products = Product::with(['images:product_id,name'])->orderByDesc('updated_at')->take(6)->get();
-        return view('productStore',compact('categorys','products','products_sell'));
+    public function sale(){
+        $categoryvh = Categories::where('name','=','Văn Học')->first();
+        $products_vh = Product::with(['images:product_id,name'])->where('category_id','=',$categoryvh->id)->orderByDesc('updated_at')->take(4)->get();
+       
+        $categorykt = Categories::where('name','=','Kinh Tế')->first();
+        $products_kt = Product::with(['images:product_id,name'])->where('category_id','=',$categorykt->id)->orderByDesc('updated_at')->take(4)->get();
+
+
+        $categorykn = Categories::where('name','=','Kĩ Năng Sống')->first();
+        $products_kn = Product::with(['images:product_id,name'])->where('category_id','=',$categorykn->id)->orderByDesc('updated_at')->take(4)->get();
+
+        $products = Product::with(['images:product_id,name'])->orderByDesc('updated_at')->take(10)->get();
+        return view('sale', compact('products','products_vh','products_kt','products_kn'));
     }
 } 
+   

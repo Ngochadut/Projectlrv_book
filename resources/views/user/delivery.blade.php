@@ -43,7 +43,8 @@
 				</div>
 			</div>
 			<!-- Order Details -->
-			<button class="newsletter-btn">Lịch sử đơn hàng</button>
+			
+			<a class="newsletter-btn" href="{{route('history')}}">Lịch sử đơn hàng</a>
 			<!-- /Order Details -->
 		</div>
 		<!-- /row -->

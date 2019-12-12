@@ -11,6 +11,9 @@ class OrderController extends Controller
 {
     public function order(){
 		$orders = Orders::with(['orderdetail'])->where('user_id','=',Auth::user()->id)->first();
+		if(!$orders){
+			return view('user.emptyCart');
+		}
 		if($orders->status === "PENDING" ){
 			return view('user.wait_order',compact('orders'));
 		}
@@ -21,14 +24,22 @@ class OrderController extends Controller
 			return view('user.delivery');
 		}
 		else if($orders->status === "DONE" ){
-			return view(''); 
+			return view('user.emptyCart'); 
 		}
-		else if($orders->status === "" ){
-			return view('checkOut');
-		}
-		else {
+		else{
 			return view('user.emptyCart');
 		}
 	}
+
+	public function cancel(Request $request){
+		$order_id = $request->order_id;
+		$order = Orders::where('user_id','=',Auth::user()->id)->find($order_id);
+		if($order->status === "PENDING"){
+			$order->status = "CANCEL";
+			$order->save();
+		}	
+		return redirect('order/checkOut');
+	}
+	
 	
 }
