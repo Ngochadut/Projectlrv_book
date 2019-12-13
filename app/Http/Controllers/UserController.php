@@ -9,9 +9,9 @@ class UserController extends Controller
     public function account(){
 		return view('user.account');
 	}
-
+ 
 	public function edit(){
-        return view('user.editAccount');
+        return view('user.editAccount'); 
        
     }
 
@@ -21,12 +21,12 @@ class UserController extends Controller
 			$data = $request->only('name', 'phone', 'firstname', 'lastname', 'address');
 		}
 		else{
-			$data = $request->only('gender', 'phone', 'firstname', 'lastname', 'address', 'password');
+			$data = $request->only('phone', 'firstname', 'lastname', 'address', 'password');
 			$data['password'] = bcrypt($data['password']);
 		}
 		$user = Users::where('email',$request->email);
 		if ($user->update($data)) {
-			return redirect()->back()->with(['class' => 'success', 'message' => 'Update Success.']);
+			return view('user.account');
 		}else{
 			return redirect()->back()->with(['class' => 'danger', 'message' => 'Error Database.']);
 		}

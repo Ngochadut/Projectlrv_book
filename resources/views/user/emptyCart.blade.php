@@ -23,7 +23,7 @@
 			</div>
 		</div>
 		<hr>
-		<a class="newsletter-btn" href="{{route('history')}}">Lịch sử đơn hàng</a>
+		<a class="newsletter-btn" href="{{route('listOrder')}}">Lịch sử đơn hàng</a>
 		<!-- /row -->
 	</div>
 	<!-- /container -->

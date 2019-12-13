@@ -57,11 +57,11 @@
                                     <td class="center">{{$author->name}}</td>
                                     <td class="center">{{$author->describes}}</td>
                                     <td class="center">
-                                        <button><a href="{{route('detailAuthor', $author->id)}}">view</a></button>
+                                        <button class="fa fa-pencil"><a href="{{route('detailAuthor', $author->id)}}">edit</a></button>
                                         <form action="{{ route('deleteAuthor',$author->id) }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button>Delete</button>
+                                            <button class="fa fa-trash">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

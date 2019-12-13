@@ -40,7 +40,7 @@
 								<div class="row">
 									<div class="col-lg-6">
 										<div class="form-group">
-											<label>First Name <font color="red">*</font></label>
+											<label>Họ <font color="red">*</font></label>
 											<input class="form-control" type="text" name="firstname" value="" placeholder="Enter the first name">
 											@if ($errors->has('firstname'))
 											<span class="text-danger">{{ $errors->first('firstname') }}</span>
@@ -49,7 +49,7 @@
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group {{ $errors->has('lastname') ? 'has-error' : '' }}">
-											<label>Last Name <font color="red">*</font></label>
+											<label>Tên <font color="red">*</font></label>
 											<input class="form-control" type="text" name="lastname" value="" placeholder="Enter the last name)">
 											@if ($errors->has('lastname'))
 											<span class="text-danger">{{ $errors->first('lastname') }}</span>
@@ -58,7 +58,7 @@
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-											<label>User Name <font color="red">*</font></label>
+											<label>Tên người dùng<font color="red">*</font></label>
 											<input class="form-control" type="text" name="name" value="" placeholder="Enter the name)">
 											@if ($errors->has('name'))
 											<span class="text-danger">{{ $errors->first('name') }}</span>
@@ -74,7 +74,7 @@
 									@endif
 								</div>
 								<div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
-									<label>Number Phone<font color="red">*</font></label>
+									<label>Điện thoại<font color="red">*</font></label>
 									<input class="form-control" type="text" name="phone" value="" placeholder="Number phone (V/d: 0969999999)">
 									@if ($errors->has('phone'))
 									<span class="text-danger">{{ $errors->first('phone') }}</span>
@@ -84,39 +84,29 @@
 									<label>Chức vụ <font color="red">*</font></label>
 									<div class="radio">
 										<label>
-											<input type="radio" name="roles" value="0">User
+											<input type="radio" name="roles" value="2">User
 										</label>
 										<label>
 											<input type="radio" name="roles" value="1">Admin
 										</label>
 									</div>
 								</div>
-								<div class="form-group checkbox">
-                            <label>
-                                <input type="checkbox" id="changepass" name="changepass" class="pt-3">Change the password
-                            </label>
-                        </div>
-                        <div id="newpass" style="display: none;">
-                            <div class="form-group row">
-                                <label class="col-md-2 pt-3">Mật khẩu cũ</label>
-                                <input type="password" id="oldpass" name="oldpass" class="form-control col-md-10"
-                                       placeholder="Mật khẩu cũ"
-                                       disabled>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-2 pt-3">Mật khẩu</label>
-                                <input type="password" id="password" name="password"  class="form-control col-md-10"
-                                       placeholder="Mật khẩu"
-                                       disabled>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-2 pt-3">Xác nhận mật khẩu</label>
-                                <input type="password" id="confirm_password" name="confirm_password" value="" class="form-control col-md-10"
-                                       placeholder="Xác nhận mật khẩu" disabled>
-                            </div>
-                        </div>
+								<div class="form-group {{ $errors->has('confirm_password') ? 'has-error' : '' }}">
+									<label>Mật khẩu <font color="red">*</font></label>
+									<input type="password" name="password" class="form-control" placeholder="Mật khẩu">
+									@if ($errors->has('password'))
+									<span class="text-danger">{{ $errors->first('password') }}</span>
+									@endif
+								</div>
+								<div class="form-group {{ $errors->has('confirm_password') ? 'has-error' : '' }}">
+									<label>Xác nhận mật khẩu <font color="red">*</font></label>
+									<input type="password" name="confirm_password" value="{{old('confirm_password')}}" class="form-control" placeholder="Xác nhận mật khẩu">
+									@if ($errors->has('confirm_password'))
+									<span class="text-danger">{{ $errors->first('confirm_password') }}</span>
+									@endif
+								</div>            
 								<div class="form-group">
-									<label>Address</label>
+									<label>Địa chỉ</label>
 									<textarea class="form-control" name="address" rows="3" placeholder="120 Xô Viết Nghệ Tĩnh, Đà Nẵng"></textarea>
 								</div>
 								<button type="submit" class="btn btn-primary">Update</button>

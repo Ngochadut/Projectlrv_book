@@ -51,11 +51,11 @@
                                     <td class="center">{{$type->id}}</td>
                                     <td class="center">{{$type->name}}</td>
                                     <td class="center">
-                                        <button><a href="{{ route('detailType',$type->id) }}">view</a></button>
+                                        <button class="fa fa-pencil" ><a type="button" href="{{ route('detailType',$type->id) }}"> Edit</a></button>
                                         <form action="{{ route('deleteType',$type->id) }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button>Delete</button>
+                                            <button class="fa fa-trash"> Delete</button>
                                         </form>
                                     </td>
                                 </tr>

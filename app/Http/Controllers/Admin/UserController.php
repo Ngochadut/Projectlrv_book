@@ -6,17 +6,20 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EditUserByAdminRequest;
 use App\Http\Requests\UserRequest;
+use App\Orders;
 use App\Users;
 use Illuminate\Foundation\Auth\User;
 
 class UserController extends Controller
 {
     public function index(){
+        $orders = Orders::all();
         $users = Users::orderByDesc('updated_at')->paginate(15);
-        return view('admin.index', compact('users'));
+        return view('admin.index', compact('users','orders')); 
     }
 
     public function create(){
+      
         return view('admin.users.createUser');
     }
 

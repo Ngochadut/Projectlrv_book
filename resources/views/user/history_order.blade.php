@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-md-12">
                 <br>
-                <h3 class="breadcrumb-header">LỊCH SỬ ĐƠN HÀNG</h3>
+                <h3 class="breadcrumb-header">MY ORDER</h3>
                 
 			</div>
 		</div>
@@ -33,23 +33,27 @@
                         <table class="table table-hover table-checkable order-column full-width" id="example4">
                             <thead>
                                 <tr>
-                                    <th class="center"> Tên Sách </th>
-                                    <th class="center"> Ngày </th>
-                                    <th class="center"> Giá </th>
+                                    <th class="center"> Mã đơn hàng </th>
+                                    <th class="center"> Ngày mua </th>
+                                    <th class="center">Sản phẩm</th>
                                     <th class="center"> Trạng Thái </th>
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($historyOder as $history)
-                                @foreach($history->orderdetail as $detail)
-                                <tr class="odd gradeX">
-                                    <td class="center">{{$detail->product->name}}</td>
-                                    <td class="center">{{$history->date_purchase}}</td>
-                                    <td class="center">{{$detail->product->price}}</td>
-                                    <td class="center">{{$history->status}}</td>
-                                </tr>
-                                @endforeach
+                               
+                            @foreach($orders as $order)
+                            <tr class="center ">
+                                <td class="center" ><a href="{{route('detail',$order->id)}}">#10278{{$order->id}}</a></td>  
+                                <td class="center">{{$order->date_purchase}}</td>  
+                                <td class="center">
+                                @foreach($order->orderdetail as $product)
+                                    {{$product->product->name}},
+                                    @endforeach 
+                                </td>
+                                <td class="center">{{$order->status}}</td>
+                            </tr>
                             @endforeach
+                               
                             </tbody>
                         </table>
                     </div>

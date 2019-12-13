@@ -21,7 +21,7 @@ class CartController extends Controller
             $num = $request->quantity;
             $cart = Auth::user()->temporatyOrder;
             $cart_array = unserialize($cart);
-            if($cart_array == null){
+            if($cart_array == null){ 
                 $cart_array = [];
                 array_push($cart_array, [$id, $num]);
                 $cart_JSON = serialize($cart_array); 
@@ -85,7 +85,7 @@ class CartController extends Controller
 
     public function delete($id){
         $cart = Auth::user()->temporatyOrder;
-        $cart_array = unserialize($cart);
+        $cart_array = unserialize($cart);   
         foreach($cart_array as $key => $value ){
             if($value[0] == $id){
                 unset($cart_array[$key]);
@@ -122,7 +122,7 @@ class CartController extends Controller
         }
     }
 
-    public function submit_cart(){
+    public function submit_cart(Request $request){
         $cart = Auth::user()->temporatyOrder;
         $cart_array = unserialize($cart);
 
@@ -147,12 +147,18 @@ class CartController extends Controller
                 $order_detail->update_by = Auth::user()->name;
                 $order_detail->save();
             }
-        }
+        } 
         Auth::user()->temporatyOrder = null;
         Auth::user()->save();
-       
-
-
+        if($request->password === null){
+			$data = $request->only('name', 'phone', 'firstname', 'lastname', 'address');
+		}
+		else{
+			$data = $request->only('phone', 'firstname', 'lastname', 'address', 'password');
+			$data['password'] = bcrypt($data['password']);
+		}
+		$user = Users::where('email',$request->email);
+		$user->update($data);
         return redirect('order/checkOut');
     }
     public function history(){

@@ -57,17 +57,16 @@ Route::group(['prefix' => 'cart'], function(){
 	Route::get('/waitOrder', 'CartController@waitOrder')->name('waitOrder');
 	Route::get('/confirmed', 'CartController@confirmed')->name('confirmed'); 
 	Route::get('/add_to_cart/{id}','CartController@apiAddToCart');
-	Route::get('/history','CartController@history')->name('history'); 
+	
 	
 });
 //ORDER
 	Route::group(['prefix' => 'order'], function(){
+	
 		Route::get('/checkout', 'OrderController@order')->name('cartOrder'); 
-		Route::get('/confirmed', 'OrderController@order')->name('confirmed'); 
-		Route::get('/delivery', 'OrderController@order')->name('delivery');
-		Route::get('/emptyCart', 'OrderController@order')->name('emptyCart'); 
-		Route::get('/checkOut', 'OrderController@order')->name('cart'); 
 		Route::post('/cancel}','OrderController@cancel')->name('cancel');
+		Route::get('/listOrder','OrderController@order')->name('listOrder');
+		Route::get('/detail/{id}','OrderController@detail')->name('detail'); 
 	
 });
 

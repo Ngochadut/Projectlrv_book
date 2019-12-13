@@ -5,7 +5,7 @@
     <title>@yield('page-title')</title>
     <meta name="csrf-token" content="{{ csrf_token()}}">
     <!--key bao mat  du lieu dang post-->
-    <meta charset="utf-8">
+    <meta charset="utf-8"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -132,7 +132,7 @@
                         <li><a href="#">B-POINT</a></li>
                         <li><a href="#">B-Blog</a></li>
                         <li><a href="{{route('store')}}">B-POINT Store</a></li>
-                        <li><a href="{{ route('cartOrder') }}">MY-ORDER</a></li>
+                        <li><a href="{{ route('listOrder') }}">MY-ORDER</a></li>
                         @if(Auth::check())
                         <li><a href="{{ route('account') }}">B-ACOUNT</a></li>
                         <li><a href="{{ route('logout') }}">Logout</a></li>

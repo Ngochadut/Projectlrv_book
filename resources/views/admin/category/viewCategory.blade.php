@@ -54,11 +54,11 @@
                                     <td class="center">{{$category->parent_category['name']}}</td>
                                     <td class="center">{{$category->describes}}</td>
                                     <td class="center">
-                                        <button><a href="{{route('detailCategory', $category->id)}}">view</a></button>
+                                        <button class="fa fa-pencil"><a href="{{route('detailCategory', $category->id)}}">edit</a></button>
                                         <form action="{{ route('deleteCategory',$category->id) }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button>Delete</button>
+                                            <button class="fa fa-trash">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

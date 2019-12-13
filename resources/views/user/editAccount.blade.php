@@ -15,12 +15,10 @@
                 INFORMATION ACCOUNT
             </div>  
         <div class="col-6 container">
-        <div class="panel-body">
+        <div class="panel-body"> 
             <div class="row">
-            <form action="{{route('account_update')}}" method="get" enctype="multipart/form-data">
-							@csrf
-            <form action="" method="post" enctype="multipart/form-data" >
-             @csrf
+            <form action="{{route('account_update')}}" method="post" enctype="multipart/form-data">
+			@csrf
             <div class="row">
                 <div class="col-sm-3 col-md-2 col-5" style="margin-left: 10px">
                     <label style="font-weight:bold;">Email</label>
@@ -38,6 +36,14 @@
                 <input id="name" name="name" type="text" placeholder="Your Name" class="form-control" value="{{ Auth::user()->name }}">
                 </div>
             </div>
+            <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5" style="margin-left: 10px">
+                        <label style="font-weight:bold;">Phone</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                        <input id="email" name="email" type="text" placeholder="Your name" class="form-control" readonly="readonly" value="{{ Auth::user()->name }}"> 
+                    </div>
+                </div>
             <hr>
             <div class="row">
                 <div class="col-sm-3 col-md-2 col-5" style="margin-left: 10px">
@@ -118,9 +124,10 @@
                 <input type="password" id="confirm_password" name="confirm_password" value="" class="form-control"
                         placeholder="Xác nhận mật khẩu" disabled>
             </div>
-            </form>
+            
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
+            </form>
         </div>
         </div>          
     </div>

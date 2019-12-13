@@ -41,62 +41,53 @@
 					<div class="section-title">
 						<h3 class="title">Billing address</h3>
 					</div>
-					<div class="form-group">
-						<div class="input" type="text" name="first-name">{{$user->name}}</div>
-					</div>
-					<div class="form-group">
-						<div class="input" type="email" name="email" placeholder="Email">{{$user->email}}</div>
-					</div>
-					<div class="form-group">
-						<div class="input" type="tel" name="tel" placeholder="Telephone">{{$user->phone}}</div>
-					</div>
-					<div class="form-group">
-						<div class="input" type="tel" name="tel" placeholder="Adrress">{{$user->adrress}}</div>
-					</div>
-				</div>
-				<!-- /Billing Details -->
-
-				<!-- Shiping Details -->
-				<div class="shiping-details">
-					<div class="section-title">
-						<h3 class="title">Shiping address</h3>
-					</div>
-					<div class="input-checkbox">
-						<input type="checkbox" id="shiping-address">
-						<label for="shiping-address">
-							<span></span>
-							Ship to a diffrent address?
-						</label>
-						<div class="caption">
-							<div class="form-group">
-								<input class="input" type="text" name="first-name" placeholder="First Name">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="last-name" placeholder="Last Name">
-							</div>
-							<div class="form-group">
-								<input class="input" type="email" name="email" placeholder="Email">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="address" placeholder="Address">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="city" placeholder="City">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="country" placeholder="Country">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-							</div>
-							<div class="form-group">
-								<input class="input" type="tel" name="tel" placeholder="Telephone">
-							</div>
+					<div class="row">
+						<div class="col-sm-3 col-md-2 col-5" style="margin-left: 10px">
+							<label style="font-weight:bold;">Email</label>
+						</div>
+						<div class="col-md-8 col-6">
+							<input id="email" name="email" type="text" placeholder="Your name" class="form-control" readonly="readonly" value="{{ Auth::user()->email }}"> 
 						</div>
 					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3 col-md-2 col-5" style="margin-left: 10px">
+							<label style="font-weight:bold;">Name</label>
+						</div>
+						<div class="col-md-8 col-6">
+							<input id="email" name="email" type="text" placeholder="Your name" class="form-control" readonly="readonly" value="{{ Auth::user()->name }}"> 
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3 col-md-2 col-5" style="margin-left: 10px">
+							<label style="font-weight:bold;">Phone</label>
+						</div>
+						<div class="col-md-8 col-6">
+						<input id="phone" name="phone" type="text" placeholder="Your Phone" class="form-control" value="{{ Auth::user()->phone }}">
+						@if ($errors->has('phone'))
+						<span class="invalid-feedback" style="display: block" role="alert">
+							<strong>{{ $errors->first('phone') }}</strong>
+						</span>
+						@endif
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3 col-md-2 col-5" style="margin-left: 10px">
+							<label style="font-weight:bold;">Address</label>
+						</div>
+						<div class="col-md-8 col-6">
+						<input id="phone" name="phone" type="text" placeholder="Your Phone" class="form-control" value="{{ Auth::user()->address }}">
+						@if ($errors->has('phone'))
+						<span class="invalid-feedback" style="display: block" role="alert">
+							<strong>{{ $errors->first('phone') }}</strong>
+						</span>
+						@endif
+						</div>
+					</div>
+					<hr>
 				</div>
-				<!-- /Shiping Details -->
-
 				<!-- Order notes -->
 				<div class="order-notes">
 					<textarea class="input" name="note" placeholder="Order Notes"></textarea>
@@ -119,13 +110,13 @@
 						<div class="order-col">
 							<div data-product-id="{{$product->id}}">
 							<button class="add-to-cart-btn btn_delete"  data-product-id="{{$product->id}}"><i class="fa fa-trash"></i></button>
-								<button class="add-to-cart-btn btn_decreament"  data-product-id="{{$product->id}}">-</button>
+								<button type="button" class="add-to-cart-btn btn_decreament"  data-product-id="{{$product->id}}">-</button>
 								<span id='quantity' data-product-id="{{$product->id}}">{{$product->quaility}}</span>
 								<input type="text" name="quantity" value="{{$product->quantity}}" hidden>
-								<button class="add-to-cart-btn btn_increament"  data-product-id="{{$product->id}}">+</button>
+								<button type="button" class="add-to-cart-btn btn_increament"  data-product-id="{{$product->id}}">+</button>
 								 x {{$product->name}}
 							 </div>
-							<div>{{$product->productTotal}}</div>
+							<div>{{number_format($product->productTotal, 0, '', ',')}}VNĐ</div>
 							
 						</div>
 					</div>
@@ -136,7 +127,7 @@
 					</div>
 					<div class="order-col">
 						<div><strong>TOTAL</strong></div>
-						<div><strong class="order-total">${{$total}}</strong></div>
+						<div><strong class="order-total">{{number_format($total, 0, '', ',')}}VNĐ</strong></div>
 					</div>
 				</div>
 				<div class="payment-method">

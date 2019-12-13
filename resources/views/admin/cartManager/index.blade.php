@@ -43,7 +43,7 @@
                                 <tr class="odd gradeX">
                                     <td class="center">{{$order->user->name}}</td>
                                     <td class="center">{{$order->date_purchase}}</td>
-                                    <td class="center">{{$order->note}}</td>
+                                    <td class="center">{{$order->note}}</td> 
                                     <td class="center">
                                         <select class="acttion_cart" data-cart="" id="status_{{$order->id}}">
                                             @if($order->status === 'PENDING')
@@ -60,7 +60,7 @@
                                             <option value="DELIVERY" selected>Delivery</option>
                                             @else
                                             <option value="DELIVERY">Delivery</option>
-                                            @endif
+                                            @endif 
                                             @if($order->status === 'DONE')
                                             <option value="DONE" selected>Done</option>
                                             @else
