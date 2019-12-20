@@ -64,7 +64,7 @@ Route::group(['prefix' => 'cart'], function(){
 	Route::group(['prefix' => 'order'], function(){
 	
 		Route::get('/checkout', 'OrderController@order')->name('cartOrder'); 
-		Route::post('/cancel}','OrderController@cancel')->name('cancel');
+		Route::post('/cancel','OrderController@cancel')->name('cancel');
 		Route::get('/listOrder','OrderController@order')->name('listOrder');
 		Route::get('/detail/{id}','OrderController@detail')->name('detail'); 
 	

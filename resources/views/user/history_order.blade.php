@@ -38,7 +38,7 @@
                                     <th class="center">Sản phẩm</th>
                                     <th class="center"> Trạng Thái </th>
                                 </tr>
-                            </thead>
+                            </thead> 
                             <tbody>
                                
                             @foreach($orders as $order)

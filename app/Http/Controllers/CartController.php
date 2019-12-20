@@ -159,9 +159,9 @@ class CartController extends Controller
 		}
 		$user = Users::where('email',$request->email);
 		$user->update($data);
-        return redirect('order/checkOut');
+        return redirect('order/checkout');
     }
-    public function history(){
+    public function history(){ 
         $user_id = Auth::user()->id;
         $historyOder = Orders::where(['user_id'=>$user_id])->with('orderdetail')->get();
 		return view('user.history_order',compact('historyOder'));

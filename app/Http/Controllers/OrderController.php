@@ -18,7 +18,7 @@ class OrderController extends Controller
 			return view('user.history_order', compact('historyOder','orders'));
 		}
 		// if($orders->status === "PENDING" ){
-		// 	return view('user.wait_order',compact('orders'));
+		// 	return view('user.wait_order',compact('orders')); 
 		// }
 		// else if($orders->status === "CONFIRM" ){
 		// 	return view('user.confirmed_order',compact('orders')); 
@@ -47,7 +47,7 @@ class OrderController extends Controller
 			$order->status = "CANCEL";
 			$order->save();
 		}	
-		return redirect('order/checkOut');
+		return redirect('order/checkout');
 	}
 	
 	

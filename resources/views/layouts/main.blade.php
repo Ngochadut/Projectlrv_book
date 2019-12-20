@@ -132,8 +132,9 @@
                         <li><a href="#">B-POINT</a></li>
                         <li><a href="#">B-Blog</a></li>
                         <li><a href="{{route('store')}}">B-POINT Store</a></li>
-                        <li><a href="{{ route('listOrder') }}">MY-ORDER</a></li>
+                        
                         @if(Auth::check())
+                        <li><a href="{{ route('listOrder') }}">MY-ORDER</a></li>
                         <li><a href="{{ route('account') }}">B-ACOUNT</a></li>
                         <li><a href="{{ route('logout') }}">Logout</a></li>
                         @else
